@@ -1,0 +1,87 @@
+<div class="inputstyle" align="center">
+  <mat-form-field>
+    <input matInput placeholder="Pokemon Name Or ID" [(ngModel)] = "input" (keyup.enter)="search()">
+  </mat-form-field>
+  <button class= "searchstyle" (click)="search()" mat-raised-button color="primary" [disabled]="!input">Search</button><br>
+  <div *ngIf="!searched">Enter a name or ID to begin</div>
+</div>
+
+<div *ngIf="show" class="infocontainerstyle">
+  
+  <h1>{{pokemonname.charAt(0).toUpperCase() + pokemonname.slice(1)}}</h1><br>
+  
+  <mat-drawer-container>
+      <mat-drawer mode="side" opened>
+        <div class=sidebarstyle>
+
+          <h2>Overview</h2>
+          <b>ID: </b>#{{pokemonid}} <br>
+          <b>Height: </b>{{pokemonheight}} decimetres<br>
+          <b>Weight: </b>{{pokemonweight}} hectograms<br>
+          <b>Typing: </b>
+          <span *ngFor="let type of pokemontypes; let isLast=last">
+              {{type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)}} <span *ngIf="!isLast">, </span>
+          </span><br>
+          <b>Abilities: </b>
+          <span *ngFor="let ability of pokemonabilities; let isLast=last">
+            {{ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1)}} <span *ngIf="!isLast">, </span>
+          </span><br><br>
+          <mat-divider></mat-divider>
+          
+          <h2>Base Stats</h2>
+          <b>Speed: </b>{{pokemonstats[0].base_stat}} <br>
+          <b>Special Defense: </b>{{pokemonstats[1].base_stat}} <br>
+          <b>Special Attack: </b>{{pokemonstats[2].base_stat}} <br>
+          <b>Defense: </b>{{pokemonstats[3].base_stat}} <br>
+          <b>Attack: </b>{{pokemonstats[4].base_stat}} <br>
+          <b>HP: </b>{{pokemonstats[5].base_stat}} <br><br>
+          <mat-divider></mat-divider>
+
+          <h2>Sprites</h2>
+          <div align=center>
+            <h4>Default</h4>
+            <img src="{{pokemonsprites.front_default}}">
+            <img src="{{pokemonsprites.back_default}}">
+            <h4>Shiny</h4>
+            <img src="{{pokemonsprites.front_shiny}}">
+            <img src="{{pokemonsprites.back_shiny}}">
+          </div><br><br>
+          <mat-divider></mat-divider>
+
+          <h2>Game Appearances</h2>
+          <li *ngFor="let appearance of pokemonappearances">
+              {{appearance.version.name.charAt(0).toUpperCase() + appearance.version.name.slice(1)}}
+          </li><br><br>
+          <mat-divider></mat-divider>
+        </div>
+      </mat-drawer>
+      
+      <mat-drawer-content>
+        <div class=mainbarstyle>
+          <h2>Moveset</h2>
+          <table width=100% class="darkTable" id="movestable">
+              <thead>
+                <tr>
+                  <th>Move</th>
+                  <th>Method of Learning</th> 
+                  <th>Level Learned (If Applicable)</th>
+                </tr>
+              </thead>
+              <ng-container *ngFor="let pokemonmove of pokemonmoves">
+                <tr>
+                  <th>{{pokemonmove.move.name.charAt(0).toUpperCase() + pokemonmove.move.name.slice(1)}}</th>
+                  <th>{{pokemonmove.version_group_details[0].move_learn_method.name.charAt(0).toUpperCase() + pokemonmove.version_group_details[0].move_learn_method.name.slice(1)}}</th>
+                  <th>{{pokemonmove.version_group_details[0].move_learn_method.name != 'level-up' ? '' : pokemonmove.version_group_details[0].level_learned_at}}</th>
+                </tr>
+            </ng-container>
+            </table>
+        </div>
+        {{sortTable()}}
+      </mat-drawer-content>
+
+  </mat-drawer-container>
+</div>
+
+<div *ngIf="error" class="infocontainerstyle">
+  No such pokemon found
+</div>
