@@ -15,6 +15,8 @@ import { MatDividerModule } from '@angular/material/divider';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatIconModule } from '@angular/material/icon';
+
 
 @NgModule({
   declarations: [
@@ -35,6 +37,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
     MatTabsModule,
     MatCardModule,
     MatSidenavModule,
+    MatIconModule
   ],
   providers: [],
   bootstrap: [AppComponent]

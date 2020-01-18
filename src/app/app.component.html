@@ -1,4 +1,6 @@
-<mat-toolbar color = "primary">Poképédia</mat-toolbar>
-<body>
-    <app-pokemon></app-pokemon>
-</body>
+<mat-toolbar color = "primary">
+    <button mat-button (click)="clicklogo()"><span><h1>Pokédex</h1></span></button>
+    <span class="space"></span>
+    <button mat-icon-button (click)="clickgithub()"><mat-icon svgIcon='github'></mat-icon></button>
+</mat-toolbar>
+<app-pokemon></app-pokemon>

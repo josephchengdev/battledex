@@ -12,4 +12,9 @@ export class ApiService {
     let url = 'https://pokeapi.co/api/v2/pokemon/' + pokemonname
     return this.httpClient.get(url)
   }
+
+  public getSpecies(pokemonname : string){
+    let url = 'https://pokeapi.co/api/v2/pokemon-species/' + pokemonname
+    return this.httpClient.get(url)
+  }
 }
