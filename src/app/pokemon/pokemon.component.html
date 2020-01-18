@@ -28,7 +28,7 @@
             {{(ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1)).split("-").join(" ")}} <span *ngIf="!isLast">, </span>
           </span><br>
           <b>Generation Introduced: </b>{{(pokemongeneration.name.charAt(0).toUpperCase() + pokemongeneration.name.slice(1)).split("-").join(" ")}}<br>
-          <b>Defeat Exp: </b>{{pokemonbaseexperience}}<br><br>
+          <b>Defeat Experience: </b>{{pokemonbaseexperience}}<br><br>
           <mat-divider></mat-divider>
 
           <h2>Description</h2>
@@ -63,8 +63,8 @@
 
           <h2>Catching and Breeding</h2>
           <b>Capture Rate: </b> {{pokemoncapturerate}}<br>
-          <b>Habitat: </b>{{(pokemonhabitat.name.charAt(0).toUpperCase() + pokemonhabitat.name.slice(1)).split("-").join(" ")}}<br>
-          <b>Evolves From: </b>{{pokemonevolvesfrom ? (pokemonevolvesfrom.name.charAt(0).toUpperCase() + pokemonevolvesfrom.name.slice(1)).split("-").join(" ") : 'Base Stage'}}<br>
+          <b>Habitat: </b>{{pokemonhabitat ? (pokemonhabitat.name.charAt(0).toUpperCase() + pokemonhabitat.name.slice(1)).split("-").join(" ") : 'Not listed'}}<br>
+          <b>Evolves From: </b>{{pokemonevolvesfrom ? (pokemonevolvesfrom.name.charAt(0).toUpperCase() + pokemonevolvesfrom.name.slice(1)).split("-").join(" ") : 'Base stage'}}<br>
           <b>Egg Group: </b>
           <span *ngFor="let egggroup of pokemonegggroups; let isLast=last">
             {{(egggroup.name.charAt(0).toUpperCase() + egggroup.name.slice(1)).split("-").join(" ")}} <span *ngIf="!isLast">, </span>
