@@ -8,7 +8,7 @@
 </div>
 
 <div *ngIf="show" class="infocontainerstyle">
-  <h1>{{(pokemonname.charAt(0).toUpperCase() + pokemonname.slice(1)).split("-").join(" ")}}</h1><br>
+  <h1>{{pokemonname}}</h1><br>
   <mat-drawer-container> 
       <mat-drawer mode="side" opened>
         <div class=sidebarstyle>
@@ -17,15 +17,15 @@
           <b>ID: </b>#{{pokemonid}} <br>
           <b>Height: </b>{{pokemonheight/10}} metres<br>
           <b>Weight: </b>{{pokemonweight/10}} kilograms<br>
-          <b>Color: </b>{{(pokemoncolor.name.charAt(0).toUpperCase() + pokemoncolor.name.slice(1)).split("-").join(" ")}}<br>
-          <b>Shape: </b>{{(pokemonshape.name.charAt(0).toUpperCase() + pokemonshape.name.slice(1)).split("-").join(" ")}}<br>
+          <b>Color: </b>{{titleformat(pokemoncolor.name)}}<br>
+          <b>Shape: </b>{{titleformat(pokemonshape.name)}}<br>
           <b>Typing: </b>
           <span *ngFor="let type of pokemontypes; let isLast=last">
-              {{(type.type.name.charAt(0).toUpperCase() + type.type.name.slice(1)).split("-").join(" ")}} <span *ngIf="!isLast">, </span>
+              {{titleformat(type.type.name)}} <span *ngIf="!isLast">, </span>
           </span><br>
           <b>Abilities: </b>
           <span *ngFor="let ability of pokemonabilities; let isLast=last">
-            {{(ability.ability.name.charAt(0).toUpperCase() + ability.ability.name.slice(1)).split("-").join(" ")}} <span *ngIf="!isLast">, </span>
+            {{titleformat(ability.ability.name)}} <span *ngIf="!isLast">, </span>
           </span><br>
           <b>Generation Introduced: </b>{{(pokemongeneration.name.charAt(0).toUpperCase() + pokemongeneration.name.slice(1)).split("-").join(" ")}}<br>
           <b>Defeat Experience: </b>{{pokemonbaseexperience}}<br><br>
@@ -63,8 +63,8 @@
 
           <h2>Catching and Breeding</h2>
           <b>Capture Rate: </b> {{pokemoncapturerate}}<br>
-          <b>Habitat: </b>{{pokemonhabitat ? (pokemonhabitat.name.charAt(0).toUpperCase() + pokemonhabitat.name.slice(1)).split("-").join(" ") : 'Not listed'}}<br>
-          <b>Evolves From: </b>{{pokemonevolvesfrom ? (pokemonevolvesfrom.name.charAt(0).toUpperCase() + pokemonevolvesfrom.name.slice(1)).split("-").join(" ") : 'Base stage'}}<br>
+          <b>Habitat: </b>{{pokemonhabitat ? titleformat(pokemonhabitat.name) : 'Not listed'}}<br>
+          <b>Evolves From: </b>{{pokemonevolvesfrom ? titleformat(pokemonevolvesfrom.name) : 'Base stage'}}<br>
           <b>Egg Group: </b>
           <span *ngFor="let egggroup of pokemonegggroups; let isLast=last">
             {{(egggroup.name.charAt(0).toUpperCase() + egggroup.name.slice(1)).split("-").join(" ")}} <span *ngIf="!isLast">, </span>
@@ -87,10 +87,10 @@
               </thead>
               <ng-container *ngFor="let pokemonmove of pokemonmoves">
                 <tr>
-                  <th>{{(pokemonmove.move.name.charAt(0).toUpperCase() + pokemonmove.move.name.slice(1)).split("-").join(" ")}}</th>
-                  <th>{{(pokemonmove.version_group_details[0].move_learn_method.name.charAt(0).toUpperCase() + pokemonmove.version_group_details[0].move_learn_method.name.slice(1)).split("-").join(" ")}}</th>
+                  <th>{{ titleformat(pokemonmove.move.name)}}</th>
+                  <th>{{ titleformat(pokemonmove.version_group_details[0].move_learn_method.name)}}</th>
                   <th>{{pokemonmove.version_group_details[0].move_learn_method.name != 'level-up' ? '' : pokemonmove.version_group_details[0].level_learned_at}}</th>
-                  <th>{{(pokemonmove.version_group_details[0].version_group.name.charAt(0).toUpperCase() + pokemonmove.version_group_details[0].version_group.name.slice(1)).split("-").join(" ")}}</th>
+                  <th>{{ titleformat(pokemonmove.version_group_details[0].version_group.name)}}</th>
                 </tr>
             </ng-container>
             </table>
@@ -102,10 +102,10 @@
 
 <div *ngIf="!searched" align=center class=specialboxstyle>
   <img src="../../assets/rotomdex.png"height="300" width="300" ><br>
-  Enter a name or ID to begin
+  Enter a pokémon name or ID to begin
 </div>
 
 <div *ngIf="error" align=center class=specialboxstyle>
   <img src="../../assets/sad.png"height="300" width="300" ><br>
-  No such pokemon found
+  No such pokémon found
 </div>

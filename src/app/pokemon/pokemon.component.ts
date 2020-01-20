@@ -45,6 +45,16 @@ export class PokemonComponent implements OnInit {
     this.input = String(this.pokemonid + 1)
     this.search()
   }
+
+  titleformat(str) {
+    str = str.charAt(0).toUpperCase() + str.slice(1).split("-").join(" ")
+    var splitStr = str.toLowerCase().split(' ');
+    for (var i = 0; i < splitStr.length; i++) {
+        splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
+    }
+    return splitStr.join(' '); 
+  }
+  
   search() {
     this.searched = true;
     if (this.input) {
@@ -53,6 +63,12 @@ export class PokemonComponent implements OnInit {
           this.show = true;
           this.error = false;
           this.pokemonname = data['name'];
+          this.pokemonname = (this.pokemonname.charAt(0).toUpperCase() + this.pokemonname.slice(1).split("-").join(" "))
+          this.pokemonname = this.pokemonname.split(" ");
+          for (var i = 0, x = this.pokemonname.length; i < x; i++) {
+            this.pokemonname[i] = this.pokemonname[i][0].toUpperCase() + this.pokemonname[i].substr(1);
+          }
+          this.pokemonname = this.pokemonname.join(" ");
           this.pokemonid = data['id'];
           this.pokemonheight = data['height']
           this.pokemonweight = data['weight']

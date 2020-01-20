@@ -17,4 +17,10 @@ export class ApiService {
     let url = 'https://pokeapi.co/api/v2/pokemon-species/' + pokemonname
     return this.httpClient.get(url)
   }
+
+  public getMove(movename : string){
+    movename = movename.toLowerCase().split(" ").join("-")
+    let url = 'https://pokeapi.co/api/v2/move/' + movename
+    return this.httpClient.get(url)
+  }
 }

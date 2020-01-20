@@ -18,6 +18,7 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';;
 import { HomeComponent } from './home/home.component';
+import { MovesComponent } from './moves/moves.component';
 
 
 
@@ -26,6 +27,7 @@ import { HomeComponent } from './home/home.component';
     AppComponent,
     PokemonComponent,
     HomeComponent,
+    MovesComponent,
   ],
   imports: [
     BrowserModule,
