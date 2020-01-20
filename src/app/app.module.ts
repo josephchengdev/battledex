@@ -19,6 +19,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AppRoutingModule } from './app-routing.module';;
 import { HomeComponent } from './home/home.component';
 import { MovesComponent } from './moves/moves.component';
+import { ItemsComponent } from './items/items.component';
 
 
 
@@ -28,6 +29,7 @@ import { MovesComponent } from './moves/moves.component';
     PokemonComponent,
     HomeComponent,
     MovesComponent,
+    ItemsComponent,
   ],
   imports: [
     BrowserModule,

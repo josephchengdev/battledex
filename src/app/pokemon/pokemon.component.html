@@ -21,11 +21,11 @@
           <b>Shape: </b>{{titleformat(pokemonshape.name)}}<br>
           <b>Typing: </b>
           <span *ngFor="let type of pokemontypes; let isLast=last">
-              {{titleformat(type.type.name)}} <span *ngIf="!isLast">, </span>
+              {{titleformat(type.type.name)}}<span *ngIf="!isLast">, </span>
           </span><br>
           <b>Abilities: </b>
           <span *ngFor="let ability of pokemonabilities; let isLast=last">
-            {{titleformat(ability.ability.name)}} <span *ngIf="!isLast">, </span>
+            {{titleformat(ability.ability.name)}}<span *ngIf="!isLast">, </span>
           </span><br>
           <b>Generation Introduced: </b>{{(pokemongeneration.name.charAt(0).toUpperCase() + pokemongeneration.name.slice(1)).split("-").join(" ")}}<br>
           <b>Defeat Experience: </b>{{pokemonbaseexperience}}<br><br>

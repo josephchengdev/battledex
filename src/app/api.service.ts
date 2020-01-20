@@ -23,4 +23,10 @@ export class ApiService {
     let url = 'https://pokeapi.co/api/v2/move/' + movename
     return this.httpClient.get(url)
   }
+
+  public getItem(itemname : string) {
+    itemname = itemname.toLowerCase().split(" ").join("-")
+    let url = 'https://pokeapi.co/api/v2/item/' + itemname
+    return this.httpClient.get(url)
+  }
 }
