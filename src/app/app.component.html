@@ -1,6 +1,7 @@
-<mat-toolbar color = "primary">
-    <button mat-button (click)="clicklogo()"><span><h1>Pokédex</h1></span></button>
+<mat-toolbar color="primary" class="mat-elevation-z10">
+    <button mat-button routerLink="/home"><h1>Poképedia</h1></button>
+    <button mat-button routerLink="/pokemon">Pokémon</button>
     <span class="space"></span>
     <button mat-icon-button (click)="clickgithub()"><mat-icon svgIcon='github'></mat-icon></button>
 </mat-toolbar>
-<app-pokemon></app-pokemon>
+<router-outlet></router-outlet>

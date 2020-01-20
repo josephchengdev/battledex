@@ -8,7 +8,7 @@ import { DomSanitizer } from "@angular/platform-browser";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  title = 'pokedex';
+  title = 'pokepedia';
 
   constructor(private matIconRegistry: MatIconRegistry, private domSanitizer: DomSanitizer){
     this.matIconRegistry.addSvgIcon(
@@ -21,6 +21,6 @@ export class AppComponent {
     window.location.reload();
   }
   clickgithub() {
-    window.location.href = 'https://github.com/josephcheng167/pokedex';
+    window.location.href = 'https://github.com/josephcheng167/pokepedia';
   }
 }

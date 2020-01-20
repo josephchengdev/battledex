@@ -1,0 +1,23 @@
+.cardstyles{
+    width:200px;
+    height:50px;
+}
+
+.boxstyles{
+    position: absolute;
+    left:50%;
+    top:50%;
+    margin-left: -100px;
+    margin-top: -25px;
+
+}
+
+.pikachustyle{
+    position: absolute;
+    width:10%;
+    height:20%;
+    left:50%;
+    top:70%;
+    margin-left: -65px;
+    margin-top: -25px;
+}

@@ -16,12 +16,16 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { MatCardModule } from '@angular/material/card';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatIconModule } from '@angular/material/icon';
+import { AppRoutingModule } from './app-routing.module';;
+import { HomeComponent } from './home/home.component';
+
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    PokemonComponent
+    PokemonComponent,
+    HomeComponent,
   ],
   imports: [
     BrowserModule,
@@ -37,7 +41,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatTabsModule,
     MatCardModule,
     MatSidenavModule,
-    MatIconModule
+    MatIconModule,
+    AppRoutingModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
