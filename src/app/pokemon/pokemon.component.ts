@@ -75,15 +75,17 @@ export class PokemonComponent implements OnInit {
     this.error = false;
     this.loading = true;
     this.apiService.getPokemon(this.input.toLowerCase()).subscribe((data)=>{
-      this.apiService.getSpecies(this.input.toLowerCase()).subscribe((moredata)=>{
+      this.pokemonname = data['name'];
+      let baseforme = this.pokemonname.split("-")[0]; 
+      this.apiService.getSpecies(baseforme).subscribe((moredata)=>{
         this.pokemonname = data['name'];
+        this.pokemonid = data['id'];
         this.pokemonname = (this.pokemonname.charAt(0).toUpperCase() + this.pokemonname.slice(1).split("-").join(" "))
         this.pokemonname = this.pokemonname.split(" ");
         for (var i = 0, x = this.pokemonname.length; i < x; i++) {
           this.pokemonname[i] = this.pokemonname[i][0].toUpperCase() + this.pokemonname[i].substr(1);
         }
         this.pokemonname = this.pokemonname.join(" ");
-        this.pokemonid = data['id'];
         this.pokemonheight = data['height']
         this.pokemonweight = data['weight']
         this.pokemontypes = data['types']
