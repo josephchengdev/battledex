@@ -60,7 +60,7 @@ export class ItemsComponent implements OnInit {
         this.itemflavors = data['flavor_text_entries']
         this.itemeffect = data['effect_entries'][0]['effect']
         this.itemcategory = data['category']['name']
-        this.itemflingeffect = (data['fling_effect'] ? this.titleformat(data['fling_effect']) : "None");
+        this.itemflingeffect = (data['fling_effect'] ? this.titleformat(data['fling_effect']['name']) : "None");
         this.itemflingpower = (data['fling_power'] ? data['fling_power'] : "NA");
         this.itemheldbys = data['held_by_pokemon'];
         this.itemsprite = data['sprites']['default']
