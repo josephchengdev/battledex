@@ -21,6 +21,7 @@ import { HomeComponent } from './home/home.component';
 import { MovesComponent } from './moves/moves.component';
 import { ItemsComponent } from './items/items.component';
 import { AbilitiesComponent } from './abilities/abilities.component';
+import { NotfoundComponent } from './notfound/notfound.component';
 
 
 
@@ -32,6 +33,7 @@ import { AbilitiesComponent } from './abilities/abilities.component';
     MovesComponent,
     ItemsComponent,
     AbilitiesComponent,
+    NotfoundComponent,
   ],
   imports: [
     BrowserModule,

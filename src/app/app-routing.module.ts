@@ -5,6 +5,7 @@ import { HomeComponent } from  './home/home.component';
 import { MovesComponent } from './moves/moves.component'
 import { ItemsComponent } from './items/items.component'
 import { AbilitiesComponent } from './abilities/abilities.component'
+import { NotfoundComponent } from './notfound/notfound.component'
 
 const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
@@ -16,7 +17,9 @@ const routes: Routes = [
   { path: 'items', component: ItemsComponent },
   { path: 'items/:param', component: ItemsComponent },
   { path: 'abilities', component: AbilitiesComponent },
-  { path: 'abilities/:param', component: AbilitiesComponent }
+  { path: 'abilities/:param', component: AbilitiesComponent },
+  { path: '404', component: NotfoundComponent},
+  { path: '**', redirectTo: '/404' }
 ];
 
 @NgModule({
