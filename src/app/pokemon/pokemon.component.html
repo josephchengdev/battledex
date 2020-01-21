@@ -29,7 +29,7 @@
               {{titleformat(ability.ability.name)}}<span *ngIf="!isLast">, </span>
             </u>
           </span><br>
-          <b>Held Items: </b>
+          <b>Held Items: </b> {{pokemonhelditems.length == 0 ? 'None' : ''}}
           <span *ngFor="let item of pokemonhelditems; let isLast=last">
             <u routerLink="/items/{{item.item.name.toLowerCase().split(' ').join('-')}}">
               {{titleformat(item.item.name)}}<span *ngIf="!isLast">, </span>
