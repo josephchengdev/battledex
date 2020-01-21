@@ -31,6 +31,7 @@ export class PokemonComponent implements OnInit {
   show = false;
   error = false;
   searched = false;
+  loading = false;
 
   constructor(private apiService: ApiService) { }
 
@@ -57,11 +58,12 @@ export class PokemonComponent implements OnInit {
   
   search() {
     this.searched = true;
+    this.show = false;
+    this.error = false;
+    this.loading = true;
     if (this.input) {
       this.apiService.getPokemon(this.input.toLowerCase()).subscribe((data)=>{
         this.apiService.getSpecies(this.input.toLowerCase()).subscribe((moredata)=>{
-          this.show = true;
-          this.error = false;
           this.pokemonname = data['name'];
           this.pokemonname = (this.pokemonname.charAt(0).toUpperCase() + this.pokemonname.slice(1).split("-").join(" "))
           this.pokemonname = this.pokemonname.split(" ");
@@ -99,10 +101,14 @@ export class PokemonComponent implements OnInit {
           this.pokemonshape = moredata['shape']
           this.pokemondescriptions = moredata['flavor_text_entries']
           this.pokemonevolutionchain = moredata['evolution_chain']
+          this.loading = false;
+          this.show = true;
+          this.error = false;
         });
       },
       err => {
         if (err.status == 404) {
+          this.loading = false;
           this.show = false;
           this.error = true;
         }

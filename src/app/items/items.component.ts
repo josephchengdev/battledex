@@ -11,6 +11,7 @@ export class ItemsComponent implements OnInit {
   show = false;
   error = false;
   searched = false;
+  loading = false;
   itemname;
   itemid;
   itemcost;
@@ -49,10 +50,11 @@ export class ItemsComponent implements OnInit {
 
   search() {
     this.searched = true;
+    this.show = false;
+    this.error = false;
+    this.loading = true;
     if (this.input) {
       this.apiService.getItem(this.input.toLowerCase()).subscribe((data)=>{
-        this.show = true;
-        this.error = false;
         this.itemname = this.titleformat(data['name']);
         this.itemid = data['id'];
         this.itemcost = (data['cost'] == 0 ? "Not Sold" : ("$" + (data['cost'])));
@@ -64,9 +66,13 @@ export class ItemsComponent implements OnInit {
         this.itemflingpower = (data['fling_power'] ? data['fling_power'] : "NA");
         this.itemheldbys = data['held_by_pokemon'];
         this.itemsprite = data['sprites']['default']
+        this.loading = false;
+        this.show = true;
+        this.error = false;
       },
       err => {
         if (err.status == 404) {
+          this.loading = false;
           this.show = false;
           this.error = true;
         }

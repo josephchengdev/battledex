@@ -11,6 +11,7 @@ export class AbilitiesComponent implements OnInit {
   show = false;
   error = false;
   searched = false;
+  loading = false;
   abilityid;
   abilityname;
   abilitymainseries;
@@ -45,10 +46,11 @@ export class AbilitiesComponent implements OnInit {
 
   search() {
     this.searched = true;
+    this.show = false;
+    this.error = false;
+    this.loading = true;
     if (this.input) {
       this.apiService.getAbility(this.input.toLowerCase()).subscribe((data)=>{
-        this.show = true;
-        this.error = false;
         this.abilityname = this.titleformat(data['name']);
         this.abilityid = data['id'];
         this.abilityflavors = data['flavor_text_entries'];
@@ -66,9 +68,13 @@ export class AbilitiesComponent implements OnInit {
       
           return 0;
       });
+      this.loading = false;
+      this.show = true;
+      this.error = false;
       },
       err => {
         if (err.status == 404) {
+          this.loading = false;
           this.show = false;
           this.error = true;
         }

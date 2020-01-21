@@ -11,6 +11,7 @@ export class MovesComponent implements OnInit {
   show = false;
   error = false;
   searched = false;
+  loading = false;
   movename;
   moveid;
   movepower;
@@ -52,10 +53,11 @@ export class MovesComponent implements OnInit {
 
   search() {
     this.searched = true;
+    this.show = false;
+    this.error = false;
+    this.loading = true;
     if (this.input) {
       this.apiService.getMove(this.input.toLowerCase()).subscribe((data)=>{
-        this.show = true;
-        this.error = false;
         this.movename = this.titleformat(data['name']);
         this.moveid = data['id'];
         this.movepower= data['power'];;
@@ -71,9 +73,13 @@ export class MovesComponent implements OnInit {
         this.moveflavors = data['flavor_text_entries'];
         this.movestatchanges = data['stat_changes'];
         this.movemeta = data['meta'];
+        this.loading = false;
+        this.show = true;
+        this.error = false;
       },
       err => {
         if (err.status == 404) {
+          this.loading = false;
           this.show = false;
           this.error = true;
         }

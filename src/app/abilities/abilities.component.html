@@ -53,6 +53,11 @@
     </mat-drawer-container>
 </div>
 
+<div *ngIf="loading" align=center class=specialboxstyle>
+    <img src="../../assets/loadingbike.gif" height="300" width="300" ><br>
+    Loading...
+</div>
+
 <div *ngIf="!searched" align=center class=specialboxstyle>
     <img src="../../assets/morpeko.png" height="300" width="300" ><br>
     Enter a ability name or ID to begin
