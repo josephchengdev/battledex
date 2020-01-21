@@ -20,6 +20,7 @@ import { AppRoutingModule } from './app-routing.module';;
 import { HomeComponent } from './home/home.component';
 import { MovesComponent } from './moves/moves.component';
 import { ItemsComponent } from './items/items.component';
+import { AbilitiesComponent } from './abilities/abilities.component';
 
 
 
@@ -30,6 +31,7 @@ import { ItemsComponent } from './items/items.component';
     HomeComponent,
     MovesComponent,
     ItemsComponent,
+    AbilitiesComponent,
   ],
   imports: [
     BrowserModule,

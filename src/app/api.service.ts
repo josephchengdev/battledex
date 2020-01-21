@@ -29,4 +29,10 @@ export class ApiService {
     let url = 'https://pokeapi.co/api/v2/item/' + itemname
     return this.httpClient.get(url)
   }
+
+  public getAbility(abilityname : string) {
+    abilityname = abilityname.toLowerCase().split(" ").join("-")
+    let url = 'https://pokeapi.co/api/v2/ability/' + abilityname
+    return this.httpClient.get(url)
+  }
 }
