@@ -67,7 +67,7 @@
           <b>Evolves From: </b>{{pokemonevolvesfrom ? titleformat(pokemonevolvesfrom.name) : 'Base stage'}}<br>
           <b>Egg Group: </b>
           <span *ngFor="let egggroup of pokemonegggroups; let isLast=last">
-            {{(egggroup.name.charAt(0).toUpperCase() + egggroup.name.slice(1)).split("-").join(" ")}} <span *ngIf="!isLast">, </span>
+            {{titleformat(egggroup.name)}} <span *ngIf="!isLast">, </span>
           </span><br><br>
 
         </div>

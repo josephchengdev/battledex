@@ -10,17 +10,15 @@
     position: absolute;
     left:50%;
     top:50%;
-    margin-left: -520px;
+    margin-left: -505px;
     margin-top: -30px;
 
 }
 
-.pikachustyle{
+.battlegroundstyle{
     position: absolute;
-    width:9%;
-    height:20%;
     left:50%;
     top:70%;
-    margin-left: -85px;
+    margin-left: -128px;
     margin-top: -25px;
 }

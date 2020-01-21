@@ -14,12 +14,39 @@
             <div class=sidebarstyle>
                 <h2>Base Statistics</h2><br>
                 <b>ID: </b>#{{abilityid}} <br>
+                <b>Introduction: </b>{{abilitygeneration}} <br>
+                <b>Main Series Ability: </b>{{(abilitymainseries ? 'Yes' : 'No')}}<br><br>
+                <mat-divider></mat-divider>
+
+                <h2>Description and Effect</h2>
+                <ng-container *ngIf="abilityflavors[0].language.name == 'en'"><i>{{abilityflavors[0].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[1].language.name == 'en'"><i>{{abilityflavors[1].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[2].language.name == 'en'"><i>{{abilityflavors[2].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[3].language.name == 'en'"><i>{{abilityflavors[3].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[4].language.name == 'en'"><i>{{abilityflavors[4].flavor_text}}</i></ng-container><br><br>
+                <b>Ability Effects: </b> {{abilityeffect}}<br>
             </div>
         </mat-drawer>
         
         <mat-drawer-content>
             <div class=mainbarstyle>
-                <h2>Description</h2><br>
+                <h2>Pokémon With Ability</h2><br>
+                <table class="darkTable">
+                    <thead>
+                      <tr>
+                        <th>Pokemon</th>
+                        <th>Ability Slot</th> 
+                        <th>Hidden Ability</th>
+                      </tr>
+                    </thead>
+                    <ng-container *ngFor="let pokemon of abilitypokemon">
+                      <tr>
+                        <th>{{ titleformat(pokemon.pokemon.name)}}</th>
+                        <th>{{ pokemon.slot }}</th>
+                        <th>{{ (pokemon.is_hidden ? 'Yes' : 'No')}}</th>
+                      </tr>
+                  </ng-container>
+                  </table>
             </div>
         </mat-drawer-content>
       
