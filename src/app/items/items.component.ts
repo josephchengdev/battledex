@@ -14,9 +14,14 @@ export class ItemsComponent implements OnInit {
   itemname;
   itemid;
   itemcost;
+  itemcategory;
   itemattributes;
   itemflavors;
   itemeffect;
+  itemflingpower;
+  itemflingeffect;
+  itemheldbys;
+  itemsprite;
 
   left() {
     this.input = String(this.itemid - 1)
@@ -50,10 +55,15 @@ export class ItemsComponent implements OnInit {
         this.error = false;
         this.itemname = this.titleformat(data['name']);
         this.itemid = data['id'];
-        this.itemcost = (data['cost'] == 0 ? "NA" : ("$" + (data['cost'])));
+        this.itemcost = (data['cost'] == 0 ? "Not Sold" : ("$" + (data['cost'])));
         this.itemattributes = data['attributes'];
         this.itemflavors = data['flavor_text_entries']
         this.itemeffect = data['effect_entries'][0]['effect']
+        this.itemcategory = data['category']['name']
+        this.itemflingeffect = (data['fling_effect'] ? this.titleformat(data['fling_effect']) : "None");
+        this.itemflingpower = (data['fling_power'] ? data['fling_power'] : "NA");
+        this.itemheldbys = data['held_by_pokemon'];
+        this.itemsprite = data['sprites']['default']
       },
       err => {
         if (err.status == 404) {

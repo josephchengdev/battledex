@@ -11,6 +11,7 @@
     margin-left:15px;
     margin-right:15px;
     max-width: 250px;
+    min-width: 250px;
 }
 
 .mainbarstyle {
@@ -32,10 +33,6 @@
 .specialboxstyle {
   font-size: 200%;
   padding-top: 100px;
-}
-
-.descboxstyle{
-  max-width: 250px;
 }
 
 table.darkTable {

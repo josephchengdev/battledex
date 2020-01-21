@@ -15,10 +15,24 @@
                     <h2>Base Statistics</h2><br>
                     <b>ID: </b>#{{itemid}} <br>
                     <b>Store Cost: </b>{{itemcost}} <br>
-                    <b>Attributes: </b>
+                    <b>Category: </b>{{titleformat(itemcategory)}} <br>
+                    <b>Attributes: </b> {{itemattributes.length == 0 ? 'None' : ''}}
                     <span *ngFor="let attribute of itemattributes; let isLast=last">
                         {{titleformat(attribute.name)}}<span *ngIf="!isLast">, </span>
                     </span><br>
+                    <b>Held By: </b> {{itemheldbys.length == 0 ? 'None' : ''}}
+                    <span *ngFor="let pokemon of itemheldbys; let isLast=last">
+                        {{titleformat(pokemon.pokemon.name)}}<span *ngIf="!isLast">, </span>
+                    </span><br>
+                    <b>Fling Power: </b>{{itemflingpower}} <br>
+                    <b>Fling Effect: </b>{{itemflingeffect}} <br><br>
+                    <mat-divider></mat-divider>
+
+                    <h2>Sprites</h2><br>
+                    <div align=center>
+                        <h4>Default</h4>
+                        <img src="{{itemsprite}}" width=60px height=60px><br>
+                    </div>
                 </div>
             </mat-drawer>
             
