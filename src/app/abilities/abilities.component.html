@@ -1,9 +1,9 @@
 <div class="inputstyle" align="center">
     <button *ngIf="show" mat-icon-button color="primary" (click)="left()"><mat-icon>chevron_left</mat-icon></button>
     <mat-form-field>
-        <input matInput placeholder="Ability Name Or ID" [(ngModel)] = "input" (keyup.enter)="search()">
+        <input matInput placeholder="Ability Name Or ID" [(ngModel)] = "input" (keyup.enter)="enter()">
     </mat-form-field>
-    <button style="margin-left: 15px" (click)="search()" mat-raised-button color="primary" [disabled]="!input">Search</button>
+    <button style="margin-left: 15px" (click)="enter()" mat-raised-button color="primary" [disabled]="!input">Search</button>
     <button *ngIf="show" mat-icon-button color="primary" (click)="right()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 
@@ -41,7 +41,7 @@
                     </thead>
                     <ng-container *ngFor="let pokemon of abilitypokemon">
                       <tr>
-                        <th>{{ titleformat(pokemon.pokemon.name)}}</th>
+                        <th><u routerLink="/pokemon/{{pokemon.pokemon.name.toLowerCase().split(' ').join('-')}}">{{titleformat(pokemon.pokemon.name)}}</u></th>
                         <th>{{ pokemon.slot }}</th>
                         <th>{{ (pokemon.is_hidden ? 'Yes' : 'No')}}</th>
                       </tr>

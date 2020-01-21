@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service'
+import { Router, ActivatedRoute } from "@angular/router";
+
 
 @Component({
   selector: 'app-items',
@@ -26,13 +28,11 @@ export class ItemsComponent implements OnInit {
 
   left() {
     this.input = String(this.itemid - 1)
-    this.search()
-  }
+    this.router.navigate(['/items', this.input.toLowerCase().split(' ').join('-')]);  }
 
   right() {
     this.input = String(this.itemid + 1)
-    this.search()
-  }
+    this.router.navigate(['/items', this.input.toLowerCase().split(' ').join('-')]);  }
 
   titleformat(str) {
     str = str.charAt(0).toUpperCase() + str.slice(1).split("-").join(" ")
@@ -43,9 +43,19 @@ export class ItemsComponent implements OnInit {
     return splitStr.join(' '); 
   }
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['param']) {
+        this.input = params['param'];
+        this.search()
+      }
+    });
+  }
+
+  enter() {
+    this.router.navigate(['/items', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   search() {

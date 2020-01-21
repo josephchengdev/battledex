@@ -10,9 +10,13 @@ const routes: Routes = [
   { path: '', redirectTo: '/home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   { path: 'pokemon', component: PokemonComponent },
+  { path: 'pokemon/:param', component: PokemonComponent },
   { path: 'moves', component: MovesComponent },
+  { path: 'moves/:param', component: MovesComponent },
   { path: 'items', component: ItemsComponent },
-  { path: 'abilities', component: AbilitiesComponent }
+  { path: 'items/:param', component: ItemsComponent },
+  { path: 'abilities', component: AbilitiesComponent },
+  { path: 'abilities/:param', component: AbilitiesComponent }
 ];
 
 @NgModule({

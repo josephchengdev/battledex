@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { ApiService } from '../api.service'
+import { ApiService } from '../api.service';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-abilities',
@@ -20,19 +21,29 @@ export class AbilitiesComponent implements OnInit {
   abilityflavors;
   abilitypokemon;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['param']) {
+        this.input = params['param'];
+        this.search()
+      }
+    });
   }
 
   left() {
     this.input = String(this.abilityid - 1)
-    this.search()
+    this.router.navigate(['/abilities', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   right() {
     this.input = String(this.abilityid + 1)
-    this.search()
+    this.router.navigate(['/abilities', this.input.toLowerCase().split(' ').join('-')]);
+  }
+
+  enter() {
+    this.router.navigate(['/abilities', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   titleformat(str) {

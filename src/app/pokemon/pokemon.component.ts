@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-pokemon',
@@ -28,23 +29,35 @@ export class PokemonComponent implements OnInit {
   pokemonshape;
   pokemondescriptions;
   pokemonevolutionchain;
+  pokemonhelditems;
   show = false;
   error = false;
   searched = false;
   loading = false;
 
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
-  ngOnInit() { }
+  ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['param']) {
+        this.input = params['param'];
+        this.search()
+      }
+    });
+   }
 
   left() {
     this.input = String(this.pokemonid - 1)
-    this.search()
+    this.router.navigate(['/pokemon', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   right() {
     this.input = String(this.pokemonid + 1)
-    this.search()
+    this.router.navigate(['/pokemon', this.input.toLowerCase().split(' ').join('-')]);
+  }
+
+  enter() {
+    this.router.navigate(['/pokemon', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   titleformat(str) {
@@ -62,8 +75,8 @@ export class PokemonComponent implements OnInit {
     this.error = false;
     this.loading = true;
     if (this.input) {
-      this.apiService.getPokemon(this.input.toLowerCase()).subscribe((data)=>{
-        this.apiService.getSpecies(this.input.toLowerCase()).subscribe((moredata)=>{
+      this.apiService.getSpecies(this.input.toLowerCase()).subscribe((moredata)=>{
+        this.apiService.getPokemon(this.input.toLowerCase()).subscribe((data)=>{
           this.pokemonname = data['name'];
           this.pokemonname = (this.pokemonname.charAt(0).toUpperCase() + this.pokemonname.slice(1).split("-").join(" "))
           this.pokemonname = this.pokemonname.split(" ");
@@ -92,6 +105,7 @@ export class PokemonComponent implements OnInit {
           this.pokemonsprites = data['sprites']
           this.pokemonstats = data['stats']
           this.pokemonappearances = data['game_indices']
+          this.pokemonhelditems = data['held_items']
           this.pokemongeneration = moredata['generation']
           this.pokemoncapturerate = moredata['capture_rate']
           this.pokemonegggroups = moredata['egg_groups']

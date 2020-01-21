@@ -1,9 +1,9 @@
 <div class="inputstyle" align="center">
   <button *ngIf="show" mat-icon-button color="primary" (click)="left()"><mat-icon>chevron_left</mat-icon></button>
   <mat-form-field>
-    <input matInput placeholder="Pokemon Name Or ID" [(ngModel)] = "input" (keyup.enter)="search()">
+    <input matInput placeholder="Pokemon Name Or ID" [(ngModel)] = "input" (keyup.enter)="enter()">
   </mat-form-field>
-  <button (click)="search()" style="margin-left: 15px" mat-raised-button color="primary" [disabled]="!input">Search</button>
+  <button (click)="enter()" style="margin-left: 15px" mat-raised-button color="primary" [disabled]="!input">Search</button>
   <button *ngIf="show" mat-icon-button color="primary" (click)="right()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 
@@ -25,7 +25,15 @@
           </span><br>
           <b>Abilities: </b>
           <span *ngFor="let ability of pokemonabilities; let isLast=last">
-            {{titleformat(ability.ability.name)}}<span *ngIf="!isLast">, </span>
+            <u routerLink="/abilities/{{ability.ability.name.toLowerCase().split(' ').join('-')}}">
+              {{titleformat(ability.ability.name)}}<span *ngIf="!isLast">, </span>
+            </u>
+          </span><br>
+          <b>Held Items: </b>
+          <span *ngFor="let item of pokemonhelditems; let isLast=last">
+            <u routerLink="/items/{{item.item.name.toLowerCase().split(' ').join('-')}}">
+              {{titleformat(item.item.name)}}<span *ngIf="!isLast">, </span>
+            </u>
           </span><br>
           <b>Generation Introduced: </b>{{(pokemongeneration.name.charAt(0).toUpperCase() + pokemongeneration.name.slice(1)).split("-").join(" ")}}<br>
           <b>Defeat Experience: </b>{{pokemonbaseexperience}}<br><br>
@@ -64,7 +72,13 @@
           <h2>Catching and Breeding</h2>
           <b>Capture Rate: </b> {{pokemoncapturerate}}<br>
           <b>Habitat: </b>{{pokemonhabitat ? titleformat(pokemonhabitat.name) : 'Not listed'}}<br>
-          <b>Evolves From: </b>{{pokemonevolvesfrom ? titleformat(pokemonevolvesfrom.name) : 'Base stage'}}<br>
+          <b>Evolves From: </b>
+          <ng-container *ngIf="pokemonevolvesfrom">
+            <u routerLink="/pokemon/{{pokemonevolvesfrom.name.toLowerCase().split(' ').join('-')}}">{{titleformat(pokemonevolvesfrom.name)}}</u>
+          </ng-container>
+          <ng-container *ngIf="!pokemonevolvesfrom">
+              Base Stage
+          </ng-container><br>
           <b>Egg Group: </b>
           <span *ngFor="let egggroup of pokemonegggroups; let isLast=last">
             {{titleformat(egggroup.name)}} <span *ngIf="!isLast">, </span>
@@ -87,7 +101,7 @@
               </thead>
               <ng-container *ngFor="let pokemonmove of pokemonmoves">
                 <tr>
-                  <th>{{ titleformat(pokemonmove.move.name)}}</th>
+                  <th routerLink="/moves/{{pokemonmove.move.name.toLowerCase().split(' ').join('-')}}"><u>{{ titleformat(pokemonmove.move.name)}}</u></th>
                   <th>{{ titleformat(pokemonmove.version_group_details[0].move_learn_method.name)}}</th>
                   <th>{{pokemonmove.version_group_details[0].move_learn_method.name != 'level-up' ? '' : pokemonmove.version_group_details[0].level_learned_at}}</th>
                   <th>{{ titleformat(pokemonmove.version_group_details[0].version_group.name)}}</th>

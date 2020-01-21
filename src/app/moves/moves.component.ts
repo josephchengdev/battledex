@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service'
+import { Router, ActivatedRoute } from "@angular/router";
 
 @Component({
   selector: 'app-moves',
@@ -27,19 +28,25 @@ export class MovesComponent implements OnInit {
   moveflavors;
   movestatchanges;
   movemeta;
-  constructor(private apiService: ApiService) { }
+  constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
+    this.activatedRoute.params.subscribe((params) => {
+      if (params['param']) {
+        this.input = params['param'];
+        this.search()
+      }
+    });
   }
 
   left() {
     this.input = String(this.moveid - 1)
-    this.search()
+    this.router.navigate(['/moves', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   right() {
     this.input = String(this.moveid + 1)
-    this.search()
+    this.router.navigate(['/moves', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   titleformat(str) {
@@ -49,6 +56,10 @@ export class MovesComponent implements OnInit {
         splitStr[i] = splitStr[i].charAt(0).toUpperCase() + splitStr[i].substring(1);     
     }
     return splitStr.join(' '); 
+  }
+
+  enter() {
+    this.router.navigate(['/moves', this.input.toLowerCase().split(' ').join('-')]);
   }
 
   search() {
