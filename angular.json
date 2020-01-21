@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "pokepedia": {
+    "battledex": {
       "root": "",
       "sourceRoot": "src",
       "projectType": "application",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/pokepedia",
+            "outputPath": "dist/battledex",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -51,18 +51,18 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "pokepedia:build"
+            "browserTarget": "battledex:build"
           },
           "configurations": {
             "production": {
-              "browserTarget": "pokepedia:build:production"
+              "browserTarget": "battledex:build:production"
             }
           }
         },
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "pokepedia:build"
+            "browserTarget": "battledex:build"
           }
         },
         "test": {
@@ -97,7 +97,7 @@
         }
       }
     },
-    "pokepedia-e2e": {
+    "battledex-e2e": {
       "root": "e2e/",
       "projectType": "application",
       "architect": {
@@ -105,11 +105,11 @@
           "builder": "@angular-devkit/build-angular:protractor",
           "options": {
             "protractorConfig": "e2e/protractor.conf.js",
-            "devServerTarget": "pokepedia:serve"
+            "devServerTarget": "battledex:serve"
           },
           "configurations": {
             "production": {
-              "devServerTarget": "pokepedia:serve:production"
+              "devServerTarget": "battledex:serve:production"
             }
           }
         },
@@ -125,5 +125,5 @@
       }
     }
   },
-  "defaultProject": "pokepedia"
+  "defaultProject": "battledex"
 }
