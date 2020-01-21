@@ -3,7 +3,7 @@
     <mat-form-field>
         <input matInput placeholder="Move Name Or ID" [(ngModel)] = "input" (keyup.enter)="search()">
     </mat-form-field>
-    <button class= "searchstyle" (click)="search()" mat-raised-button color="primary" [disabled]="!input">Search</button>
+    <button style="margin-left: 15px" (click)="search()" mat-raised-button color="primary" [disabled]="!input">Search</button>
     <button *ngIf="show" mat-icon-button color="primary" (click)="right()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 
