@@ -50,15 +50,60 @@ export class ApiService {
     return this.httpClient.get(url)
   }
 
+  public getAllMoves(): Observable<String[]>{
+    let url = 'https://pokeapi.co/api/v2/move/?offset=20&limit=1200'
+    let allmoves = []
+    return this.httpClient.get(url)
+      .pipe(
+        map((data: any) => {
+          for(let move of data['results']) {
+            allmoves.push(this.titleformat(move['name']));
+          }
+          allmoves.sort();
+          return allmoves;
+        })
+      );
+  }
+
   public getItem(itemname : string) {
     itemname = itemname.toLowerCase().split(" ").join("-")
     let url = 'https://pokeapi.co/api/v2/item/' + itemname
     return this.httpClient.get(url)
   }
 
+  public getAllItems(): Observable<String[]>{
+    let url = 'https://pokeapi.co/api/v2/item/?offset=20&limit=1200'
+    let allitems = []
+    return this.httpClient.get(url)
+      .pipe(
+        map((data: any) => {
+          for(let item of data['results']) {
+            allitems.push(this.titleformat(item['name']));
+          }
+          allitems.sort();
+          return allitems;
+        })
+      );
+  }
+
   public getAbility(abilityname : string) {
     abilityname = abilityname.toLowerCase().split(" ").join("-")
     let url = 'https://pokeapi.co/api/v2/ability/' + abilityname
     return this.httpClient.get(url)
+  }
+
+  public getAllAbilities(): Observable<String[]>{
+    let url = 'https://pokeapi.co/api/v2/ability/?offset=20&limit=1200'
+    let allabilities = []
+    return this.httpClient.get(url)
+      .pipe(
+        map((data: any) => {
+          for(let ability of data['results']) {
+            allabilities.push(this.titleformat(ability['name']));
+          }
+          allabilities.sort();
+          return allabilities;
+        })
+      );
   }
 }

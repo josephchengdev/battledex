@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service'
 import { Router, ActivatedRoute } from "@angular/router";
 import { HostListener } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 
 @Component({
@@ -28,13 +31,21 @@ export class ItemsComponent implements OnInit {
   itemsprite;
   focus = false;
 
+  options;
+  filteredOptions: Observable<string[]>;
+  myControl = new FormControl();
+
   left() {
-    this.input = String(this.itemid - 1)
-    this.router.navigate(['/items', this.input.toLowerCase().split(' ').join('-')]);  }
+    this.router.navigate(['/items', String(this.itemid - 1)]);
+  }
 
   right() {
-    this.input = String(this.itemid + 1)
-    this.router.navigate(['/items', this.input.toLowerCase().split(' ').join('-')]);  }
+    this.router.navigate(['/items', String(this.itemid + 1)]);
+  }
+
+  enter() {
+    this.router.navigate(['/items', this.myControl.value.toLowerCase().split(" ").join("-")]);
+  }
 
   titleformat(str) {
     str = str.charAt(0).toUpperCase() + str.slice(1).split("-").join(" ")
@@ -48,12 +59,25 @@ export class ItemsComponent implements OnInit {
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.apiService.getAllItems().subscribe((allItems: String[])=>{
+      this.options = allItems; 
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    });
+
     this.activatedRoute.params.subscribe((params) => {
       if (params['param']) {
         this.input = params['param'];
         this.search()
       }
     });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -76,10 +100,6 @@ export class ItemsComponent implements OnInit {
     this.focus = false
   }
 
-  enter() {
-    this.router.navigate(['/items', this.input.toLowerCase().split(' ').join('-')]);
-  }
-
   search() {
     this.searched = true;
     this.show = false;
@@ -88,6 +108,7 @@ export class ItemsComponent implements OnInit {
     if (this.input) {
       this.apiService.getItem(this.input.toLowerCase()).subscribe((data)=>{
         this.itemname = this.titleformat(data['name']);
+        this.myControl.setValue(this.titleformat(this.itemname))
         this.itemid = data['id'];
         this.itemcost = (data['cost'] == 0 ? "Not Sold" : ("$" + (data['cost'])));
         this.itemattributes = data['attributes'];

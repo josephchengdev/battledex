@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { HostListener } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-abilities',
@@ -23,15 +26,32 @@ export class AbilitiesComponent implements OnInit {
   abilitypokemon;
   focus = false;
 
+  options;
+  filteredOptions: Observable<string[]>;
+  myControl = new FormControl();
+
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.apiService.getAllAbilities().subscribe((allAbilities: String[])=>{
+      this.options = allAbilities; 
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    });
+
     this.activatedRoute.params.subscribe((params) => {
       if (params['param']) {
         this.input = params['param'];
         this.search()
       }
     });
+  }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
   }
 
   @HostListener('document:keydown', ['$event'])
@@ -55,17 +75,15 @@ export class AbilitiesComponent implements OnInit {
   }
 
   left() {
-    this.input = String(this.abilityid - 1)
-    this.router.navigate(['/abilities', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/abilities', String(this.abilityid - 1)]);
   }
 
   right() {
-    this.input = String(this.abilityid + 1)
-    this.router.navigate(['/abilities', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/abilities', String(this.abilityid + 1)]);
   }
 
   enter() {
-    this.router.navigate(['/abilities', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/abilities', this.myControl.value.toLowerCase().split(" ").join("-")]);
   }
 
   titleformat(str) {
@@ -85,6 +103,7 @@ export class AbilitiesComponent implements OnInit {
     if (this.input) {
       this.apiService.getAbility(this.input.toLowerCase()).subscribe((data)=>{
         this.abilityname = this.titleformat(data['name']);
+        this.myControl.setValue(this.titleformat(this.abilityname))
         this.abilityid = data['id'];
         this.abilityflavors = data['flavor_text_entries'];
         this.abilityeffect = data['effect_entries'][0]['effect']

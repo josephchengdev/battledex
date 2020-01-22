@@ -1,9 +1,14 @@
 <div class="inputstyle" align="center">
     <button *ngIf="show" mat-icon-button color="primary" (click)="left()"><mat-icon>chevron_left</mat-icon></button>
     <mat-form-field>
-        <input matInput placeholder="Ability Name Or ID" [(ngModel)] = "input" (keyup.enter)="enter()" (focus)="onFocus()" (blur)="onBlur()">
+        <input type="text" placeholder="Ability Name Or ID" (keyup.enter)="enter()" (focus)="onFocus()" (blur)="onBlur()" matInput [formControl]="myControl" [matAutocomplete]="auto">
+        <mat-autocomplete autoActiveFirstOption #auto="matAutocomplete">
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+            {{option}}
+            </mat-option>
+        </mat-autocomplete>
     </mat-form-field>
-    <button style="margin-left: 15px" (click)="enter()" mat-raised-button color="primary" [disabled]="!input">Search</button>
+    <button style="margin-left: 15px" (click)="enter()" mat-raised-button color="primary" [disabled]="!this.myControl.value">Search</button>
     <button *ngIf="show" mat-icon-button color="primary" (click)="right()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 

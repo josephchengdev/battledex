@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service'
 import { Router, ActivatedRoute } from "@angular/router";
 import { HostListener } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-moves',
@@ -31,9 +34,26 @@ export class MovesComponent implements OnInit {
   movemeta;
   focus = false;
 
+  options;
+  filteredOptions: Observable<string[]>;
+  myControl = new FormControl();
+
   constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
+
   ngOnInit() {
+    this.apiService.getAllMoves().subscribe((allMoves: String[])=>{
+      this.options = allMoves; 
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    });
+
     this.activatedRoute.params.subscribe((params) => {
       if (params['param']) {
         this.input = params['param'];
@@ -63,13 +83,15 @@ export class MovesComponent implements OnInit {
   }
 
   left() {
-    this.input = String(this.moveid - 1)
-    this.router.navigate(['/moves', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/moves', String(this.moveid - 1)]);
   }
 
   right() {
-    this.input = String(this.moveid + 1)
-    this.router.navigate(['/moves', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/moves', String(this.moveid + 1)]);
+  }
+
+  enter() {
+    this.router.navigate(['/moves', this.myControl.value.toLowerCase().split(" ").join("-")]);
   }
 
   titleformat(str) {
@@ -81,10 +103,6 @@ export class MovesComponent implements OnInit {
     return splitStr.join(' '); 
   }
 
-  enter() {
-    this.router.navigate(['/moves', this.input.toLowerCase().split(' ').join('-')]);
-  }
-
   search() {
     this.searched = true;
     this.show = false;
@@ -93,6 +111,7 @@ export class MovesComponent implements OnInit {
     if (this.input) {
       this.apiService.getMove(this.input.toLowerCase()).subscribe((data)=>{
         this.movename = this.titleformat(data['name']);
+        this.myControl.setValue(this.titleformat(this.movename))
         this.moveid = data['id'];
         this.movepower= data['power'];;
         this.movepp = data['pp'];
