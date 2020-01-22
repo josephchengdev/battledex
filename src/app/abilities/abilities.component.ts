@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router, ActivatedRoute } from "@angular/router";
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-abilities',
@@ -20,6 +21,7 @@ export class AbilitiesComponent implements OnInit {
   abilityeffect;
   abilityflavors;
   abilitypokemon;
+  focus = false;
 
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
@@ -30,6 +32,26 @@ export class AbilitiesComponent implements OnInit {
         this.search()
       }
     });
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) { 
+    if (!this.error && this.searched && !this.focus) {
+      if ((event.key == "Right") || (event.key == "ArrowRight")) {
+        this.right()
+      }
+      if ((event.key == "Left") || (event.key == "ArrowLeft")) {
+        this.left()
+      }
+    }
+  }
+
+  onFocus() {
+    this.focus = true
+  }
+
+  onBlur() {
+    this.focus = false
   }
 
   left() {

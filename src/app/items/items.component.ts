@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service'
 import { Router, ActivatedRoute } from "@angular/router";
+import { HostListener } from '@angular/core';
 
 
 @Component({
@@ -25,6 +26,7 @@ export class ItemsComponent implements OnInit {
   itemflingeffect;
   itemheldbys;
   itemsprite;
+  focus = false;
 
   left() {
     this.input = String(this.itemid - 1)
@@ -52,6 +54,26 @@ export class ItemsComponent implements OnInit {
         this.search()
       }
     });
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) { 
+    if (!this.error && this.searched && !this.focus) {
+      if ((event.key == "Right") || (event.key == "ArrowRight")) {
+        this.right()
+      }
+      if ((event.key == "Left") || (event.key == "ArrowLeft")) {
+        this.left()
+      }
+    }
+  }
+
+  onFocus() {
+    this.focus = true
+  }
+
+  onBlur() {
+    this.focus = false
   }
 
   enter() {

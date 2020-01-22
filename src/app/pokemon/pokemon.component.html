@@ -1,13 +1,13 @@
 <div class="inputstyle" align="center">
   <button *ngIf="show" mat-icon-button color="primary" (click)="left()"><mat-icon>chevron_left</mat-icon></button>
   <mat-form-field>
-    <input matInput placeholder="Pokemon Name Or ID" [(ngModel)] = "input" (keyup.enter)="enter()">
+    <input matInput placeholder="Pokemon Name Or ID" [(ngModel)] = "input" (keyup.enter)="enter()" (focus)="onFocus()" (blur)="onBlur()">
   </mat-form-field>
   <button (click)="enter()" style="margin-left: 15px" mat-raised-button color="primary" [disabled]="!input">Search</button>
   <button *ngIf="show" mat-icon-button color="primary" (click)="right()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 
-<div *ngIf="show" class="infocontainerstyle">
+<div *ngIf="show" class="infocontainerstyle"> 
   <h1>{{pokemonname}}</h1><br>
   <mat-drawer-container> 
       <mat-drawer mode="side" opened>

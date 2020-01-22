@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service'
 import { Router, ActivatedRoute } from "@angular/router";
+import { HostListener } from '@angular/core';
 
 @Component({
   selector: 'app-moves',
@@ -28,6 +29,8 @@ export class MovesComponent implements OnInit {
   moveflavors;
   movestatchanges;
   movemeta;
+  focus = false;
+
   constructor(private apiService: ApiService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
@@ -37,6 +40,26 @@ export class MovesComponent implements OnInit {
         this.search()
       }
     });
+  }
+
+  @HostListener('document:keydown', ['$event'])
+  handleKeyboardEvent(event: KeyboardEvent) { 
+    if (!this.error && this.searched && !this.focus) {
+      if ((event.key == "Right") || (event.key == "ArrowRight")) {
+        this.right()
+      }
+      if ((event.key == "Left") || (event.key == "ArrowLeft")) {
+        this.left()
+      }
+    }
+  }
+
+  onFocus() {
+    this.focus = true
+  }
+
+  onBlur() {
+    this.focus = false
   }
 
   left() {
