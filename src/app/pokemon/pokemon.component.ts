@@ -2,6 +2,9 @@ import { Component, OnInit } from '@angular/core';
 import { ApiService } from '../api.service';
 import { Router, ActivatedRoute } from "@angular/router";
 import { HostListener } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { Observable } from 'rxjs';
+import { map, startWith } from 'rxjs/operators';
 
 @Component({
   selector: 'app-pokemon',
@@ -37,9 +40,21 @@ export class PokemonComponent implements OnInit {
   loading = false;
   focus = false;
 
+  options;
+  filteredOptions: Observable<string[]>;
+  myControl = new FormControl();
+
   constructor(private apiService: ApiService, private router: Router, private activatedRoute: ActivatedRoute) { }
 
   ngOnInit() {
+    this.apiService.getAllPokemon().subscribe((allPokemon: String[])=>{
+      this.options = allPokemon; 
+      this.filteredOptions = this.myControl.valueChanges.pipe(
+        startWith(''),
+        map(value => this._filter(value))
+      );
+    });
+
     this.activatedRoute.params.subscribe((params) => {
       if (params['param']) {
         this.input = params['param'];
@@ -47,6 +62,11 @@ export class PokemonComponent implements OnInit {
       }
     });
    }
+
+  private _filter(value: string): string[] {
+    const filterValue = value.toLowerCase();
+    return this.options.filter(option => option.toLowerCase().indexOf(filterValue) === 0);
+  }
 
   @HostListener('document:keydown', ['$event'])
   handleKeyboardEvent(event: KeyboardEvent) { 
@@ -69,17 +89,15 @@ export class PokemonComponent implements OnInit {
   }
 
   left() {
-    this.input = String(this.pokemonid - 1)
-    this.router.navigate(['/pokemon', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/pokemon', String(this.pokemonid - 1)]);
   }
 
   right() {
-    this.input = String(this.pokemonid + 1)
-    this.router.navigate(['/pokemon', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/pokemon', String(this.pokemonid + 1)]);
   }
 
   enter() {
-    this.router.navigate(['/pokemon', this.input.toLowerCase().split(' ').join('-')]);
+    this.router.navigate(['/pokemon', this.myControl.value.toLowerCase().split(" ").join("-")]);
   }
 
   titleformat(str) {
@@ -147,6 +165,7 @@ export class PokemonComponent implements OnInit {
     this.loading = true;
     this.apiService.getPokemon(this.input.toLowerCase()).subscribe((data)=>{
       this.pokemonname = data['name'];
+      this.myControl.setValue(this.titleformat(this.pokemonname))
       let baseforme = this.pokemonname.split("-")[0]; 
       this.apiService.getSpecies(baseforme).subscribe((moredata)=>{
         this.datamapping(data, moredata);
