@@ -25,7 +25,7 @@ export class ApiService {
   }
 
   public getAllPokemon(): Observable<String[]>{
-    let url = 'https://pokeapi.co/api/v2/pokemon/?offset=20&limit=1200'
+    let url = 'https://pokeapi.co/api/v2/pokemon/?limit=1200'
     let allpokemon = []
     return this.httpClient.get(url)
       .pipe(
@@ -51,7 +51,7 @@ export class ApiService {
   }
 
   public getAllMoves(): Observable<String[]>{
-    let url = 'https://pokeapi.co/api/v2/move/?offset=20&limit=1200'
+    let url = 'https://pokeapi.co/api/v2/move/?limit=1200'
     let allmoves = []
     return this.httpClient.get(url)
       .pipe(
@@ -72,7 +72,7 @@ export class ApiService {
   }
 
   public getAllItems(): Observable<String[]>{
-    let url = 'https://pokeapi.co/api/v2/item/?offset=20&limit=1200'
+    let url = 'https://pokeapi.co/api/v2/item/?limit=1200'
     let allitems = []
     return this.httpClient.get(url)
       .pipe(
