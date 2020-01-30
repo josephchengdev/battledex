@@ -106,7 +106,13 @@ export class AbilitiesComponent implements OnInit {
         this.myControl.setValue(this.titleformat(this.abilityname))
         this.abilityid = data['id'];
         this.abilityflavors = data['flavor_text_entries'];
-        this.abilityeffect = data['effect_entries'][0]['effect']
+        if(data['effect_entries'].length > 0){
+          this.abilityeffect = data['effect_entries'][0]['effect']
+        }
+        else {
+          this.abilityeffect = 'None'
+        }
+        // console.log(this.abilityflavors)
         this.abilitygeneration = data['generation']['name'].charAt(0).toUpperCase() + data['generation']['name'].slice(1).split("-").join(" ");
         this.abilitypokemon = data['pokemon'];
         this.abilitypokemon = this.abilitypokemon.sort((n1,n2) => {

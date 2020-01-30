@@ -22,11 +22,16 @@
             <mat-divider></mat-divider>
 
             <h2>Description and Effect</h2>
-            <ng-container *ngIf="abilityflavors[0].language.name == 'en'"><i>{{abilityflavors[0].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="abilityflavors[1].language.name == 'en'"><i>{{abilityflavors[1].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="abilityflavors[2].language.name == 'en'"><i>{{abilityflavors[2].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="abilityflavors[3].language.name == 'en'"><i>{{abilityflavors[3].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="abilityflavors[4].language.name == 'en'"><i>{{abilityflavors[4].flavor_text}}</i></ng-container><br><br>
+            <ng-container *ngIf="abilityflavors.length != 0">
+                <ng-container *ngIf="abilityflavors[0].language.name == 'en'"><i>{{abilityflavors[0].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[1].language.name == 'en'"><i>{{abilityflavors[1].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[2].language.name == 'en'"><i>{{abilityflavors[2].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[3].language.name == 'en'"><i>{{abilityflavors[3].flavor_text}}</i></ng-container>
+                <ng-container *ngIf="abilityflavors[4].language.name == 'en'"><i>{{abilityflavors[4].flavor_text}}</i></ng-container><br><br>
+            </ng-container>
+            <ng-container *ngIf="abilityflavors.length == 0">
+                No flavor text exists for this ability<br><br>
+            </ng-container>
             <b>Ability Effects: </b> {{abilityeffect}}<br>
     </div>
     <div class="right-div right-text mat-elevation-z10">
