@@ -23,7 +23,7 @@
 
     <mat-sidenav-container fxFlexFill>
         
-        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  opened="false" fxHide.gt-sm="true">
+        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  fixedInViewport="true" [style.marginTop.px]="56" opened="false" fxHide.gt-sm="true">
             <div fxLayout="column" align=left>
                 <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
                 <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
