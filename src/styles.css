@@ -7,28 +7,48 @@ body {
     background-color: #333333;
     color: lightgray;
 }
-/* .basic-container {
-    padding: 30px;
+
+.container
+{
+  text-align: center;
+  padding: 15px;  
 }
-.version-info {
-    font-size: 8pt;
-    float: right;
-} */
+
+.left-div
+{
+  display: inline-block;
+  max-width: 10%;
+  min-width: 10%;
+  text-align: left;
+  padding: 30px;
+  background-color: #555555;
+  border-radius: 3px;
+  margin: 15px;
+  vertical-align: top;
+}
+.right-div
+{
+  display: inline-block;
+  min-width: 70%;
+  max-width: 70%;
+  text-align: left;
+  padding: 30px;
+  background-color: #555555;
+  border-radius: 3px;
+  margin: 15px;
+}
+
+@media screen and (max-width: 1320px) 
+{
+  .left-div, .right-div
+    {
+       max-width: 100%;
+    }
+}
 
 .inputstyle {
     margin-top: 3%;
 }
-
-/* .infocontainerstyle {
-    margin-left: 15px;
-    margin-right: 15px;
-    margin-bottom: 15px;
-}
-
-.appearancesstyle {
-    margin-left:15px;
-    margin-right:15px;
-} */
 
 .specialboxstyle {
   font-size: 160%;

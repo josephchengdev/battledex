@@ -8,128 +8,118 @@
       </mat-option>
     </mat-autocomplete>
   </mat-form-field>
-  <button (click)="enter()" style="margin-left: 15px" mat-raised-button color="primary" [disabled]="!this.myControl.value">Search</button>
+  <button (click)="enter()" style="margin-left: 1%" mat-raised-button color="primary" [disabled]="!this.myControl.value">Search</button>
   <button *ngIf="show" mat-icon-button color="primary" (click)="right()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 
-<div *ngIf="show" class="infocontainerstyle"> 
-  <h1>{{pokemonname}}</h1><br>
-  <mat-drawer-container> 
-      <mat-drawer mode="side" opened>
-        <div class=sidebarstyle>
+<div class="container" *ngIf="show">
+  <h1>{{pokemonname}}</h1>
+  <div class="left-div left-text mat-elevation-z10">
+    <h2>Overview</h2>
+      <b>ID: </b>#{{pokemonid}} <br>
+      <b>Height: </b>{{pokemonheight/10}} metres<br>
+      <b>Weight: </b>{{pokemonweight/10}} kilograms<br>
+      <b>Color: </b>{{titleformat(pokemoncolor.name)}}<br>
+      <b>Shape: </b>{{titleformat(pokemonshape.name)}}<br>
+      <b>Typing: </b>
+      <span *ngFor="let type of pokemontypes; let isLast=last">
+          {{titleformat(type.type.name)}}<span *ngIf="!isLast">, </span>
+      </span><br>
+      <b>Abilities: </b>
+      <span *ngFor="let ability of pokemonabilities; let isLast=last">
+        <u routerLink="/abilities/{{ability.ability.name.toLowerCase().split(' ').join('-')}}">
+          {{titleformat(ability.ability.name)}}<span *ngIf="!isLast">, </span>
+        </u>
+      </span><br>
+      <b>Held Items: </b> {{pokemonhelditems.length == 0 ? 'None' : ''}}
+      <span *ngFor="let item of pokemonhelditems; let isLast=last">
+        <u routerLink="/items/{{item.item.name.toLowerCase().split(' ').join('-')}}">
+          {{titleformat(item.item.name)}}<span *ngIf="!isLast">, </span>
+        </u>
+      </span><br>
+      <b>Generation Introduced: </b>{{(pokemongeneration.name.charAt(0).toUpperCase() + pokemongeneration.name.slice(1)).split("-").join(" ")}}<br>
+      <b>Defeat Experience: </b>{{pokemonbaseexperience}}<br><br>
+      <mat-divider></mat-divider>
 
-          <h2>Overview</h2>
-          <b>ID: </b>#{{pokemonid}} <br>
-          <b>Height: </b>{{pokemonheight/10}} metres<br>
-          <b>Weight: </b>{{pokemonweight/10}} kilograms<br>
-          <b>Color: </b>{{titleformat(pokemoncolor.name)}}<br>
-          <b>Shape: </b>{{titleformat(pokemonshape.name)}}<br>
-          <b>Typing: </b>
-          <span *ngFor="let type of pokemontypes; let isLast=last">
-              {{titleformat(type.type.name)}}<span *ngIf="!isLast">, </span>
-          </span><br>
-          <b>Abilities: </b>
-          <span *ngFor="let ability of pokemonabilities; let isLast=last">
-            <u routerLink="/abilities/{{ability.ability.name.toLowerCase().split(' ').join('-')}}">
-              {{titleformat(ability.ability.name)}}<span *ngIf="!isLast">, </span>
-            </u>
-          </span><br>
-          <b>Held Items: </b> {{pokemonhelditems.length == 0 ? 'None' : ''}}
-          <span *ngFor="let item of pokemonhelditems; let isLast=last">
-            <u routerLink="/items/{{item.item.name.toLowerCase().split(' ').join('-')}}">
-              {{titleformat(item.item.name)}}<span *ngIf="!isLast">, </span>
-            </u>
-          </span><br>
-          <b>Generation Introduced: </b>{{(pokemongeneration.name.charAt(0).toUpperCase() + pokemongeneration.name.slice(1)).split("-").join(" ")}}<br>
-          <b>Defeat Experience: </b>{{pokemonbaseexperience}}<br><br>
-          <mat-divider></mat-divider>
+      <h2>Description</h2>
+      <div class=descboxstyle>
+        <ng-container *ngIf="pokemondescriptions[0].language.name == 'en'"><i>{{pokemondescriptions[0].flavor_text}}</i></ng-container>
+        <ng-container *ngIf="pokemondescriptions[1].language.name == 'en'"><i>{{pokemondescriptions[1].flavor_text}}</i></ng-container>
+        <ng-container *ngIf="pokemondescriptions[2].language.name == 'en'"><i>{{pokemondescriptions[2].flavor_text}}</i></ng-container>
+        <ng-container *ngIf="pokemondescriptions[3].language.name == 'en'"><i>{{pokemondescriptions[3].flavor_text}}</i></ng-container>
+        <ng-container *ngIf="pokemondescriptions[4].language.name == 'en'"><i>{{pokemondescriptions[4].flavor_text}}</i></ng-container>
+      </div><br>
+      <mat-divider></mat-divider>
 
-          <h2>Description</h2>
-          <div class=descboxstyle>
-            <ng-container *ngIf="pokemondescriptions[0].language.name == 'en'"><i>{{pokemondescriptions[0].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="pokemondescriptions[1].language.name == 'en'"><i>{{pokemondescriptions[1].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="pokemondescriptions[2].language.name == 'en'"><i>{{pokemondescriptions[2].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="pokemondescriptions[3].language.name == 'en'"><i>{{pokemondescriptions[3].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="pokemondescriptions[4].language.name == 'en'"><i>{{pokemondescriptions[4].flavor_text}}</i></ng-container>
-          </div><br>
-          <mat-divider></mat-divider>
-
-          <h2>Sprites</h2>
-          <div align=center>
-            <h4>Default</h4>
-            <img src="{{pokemonsprites.front_default}}">
-            <img src="{{pokemonsprites.back_default}}">
-            <h4>Shiny</h4>
-            <img src="{{pokemonsprites.front_shiny}}">
-            <img src="{{pokemonsprites.back_shiny}}">
-          </div><br>
-          <mat-divider></mat-divider>
-          
-          <h2>Base Stats</h2>
-          <b>Speed: </b>{{pokemonstats[0].base_stat}} <br>
-          <b>Special Defense: </b>{{pokemonstats[1].base_stat}} <br>
-          <b>Special Attack: </b>{{pokemonstats[2].base_stat}} <br>
-          <b>Defense: </b>{{pokemonstats[3].base_stat}} <br>
-          <b>Attack: </b>{{pokemonstats[4].base_stat}} <br>
-          <b>HP: </b>{{pokemonstats[5].base_stat}} <br><br>
-          <mat-divider></mat-divider>
-
-          <h2>Catching and Breeding</h2>
-          <b>Capture Rate: </b> {{pokemoncapturerate}}<br>
-          <b>Habitat: </b>{{pokemonhabitat ? titleformat(pokemonhabitat.name) : 'Not listed'}}<br>
-          <b>Evolves From: </b>
-          <ng-container *ngIf="pokemonevolvesfrom">
-            <u routerLink="/pokemon/{{pokemonevolvesfrom.name.toLowerCase().split(' ').join('-')}}">{{titleformat(pokemonevolvesfrom.name)}}</u>
-          </ng-container>
-          <ng-container *ngIf="!pokemonevolvesfrom">
-              Base Stage
-          </ng-container><br>
-          <b>Egg Group: </b>
-          <span *ngFor="let egggroup of pokemonegggroups; let isLast=last">
-            {{titleformat(egggroup.name)}} <span *ngIf="!isLast">, </span>
-          </span><br><br>
-
-        </div>
-      </mat-drawer>
+      <h2>Sprites</h2>
+      <div align=center>
+        <h4>Default</h4>
+        <img src="{{pokemonsprites.front_default}}">
+        <img src="{{pokemonsprites.back_default}}">
+        <h4>Shiny</h4>
+        <img src="{{pokemonsprites.front_shiny}}">
+        <img src="{{pokemonsprites.back_shiny}}">
+      </div><br>
+      <mat-divider></mat-divider>
       
-      <mat-drawer-content>
-        <div class=mainbarstyle>
-          <h2>Moveset</h2>
-          <table class="darkTable">
-              <thead>
-                <tr>
-                  <th>Move</th>
-                  <th>Method of Learning</th> 
-                  <th>Level Learned</th>
-                  <th>Reference Game</th>
-                </tr>
-              </thead>
-              <ng-container *ngFor="let pokemonmove of pokemonmoves">
-                <tr>
-                  <th routerLink="/moves/{{pokemonmove.move.name.toLowerCase().split(' ').join('-')}}"><u>{{ titleformat(pokemonmove.move.name)}}</u></th>
-                  <th>{{ titleformat(pokemonmove.version_group_details[0].move_learn_method.name)}}</th>
-                  <th>{{pokemonmove.version_group_details[0].move_learn_method.name != 'level-up' ? '' : pokemonmove.version_group_details[0].level_learned_at}}</th>
-                  <th>{{ titleformat(pokemonmove.version_group_details[0].version_group.name)}}</th>
-                </tr>
-            </ng-container>
-            </table>
-        </div>
-      </mat-drawer-content>
+      <h2>Base Stats</h2>
+      <b>Speed: </b>{{pokemonstats[0].base_stat}} <br>
+      <b>Special Defense: </b>{{pokemonstats[1].base_stat}} <br>
+      <b>Special Attack: </b>{{pokemonstats[2].base_stat}} <br>
+      <b>Defense: </b>{{pokemonstats[3].base_stat}} <br>
+      <b>Attack: </b>{{pokemonstats[4].base_stat}} <br>
+      <b>HP: </b>{{pokemonstats[5].base_stat}} <br><br>
+      <mat-divider></mat-divider>
 
-  </mat-drawer-container>
+      <h2>Catching and Breeding</h2>
+      <b>Capture Rate: </b> {{pokemoncapturerate}}<br>
+      <b>Habitat: </b>{{pokemonhabitat ? titleformat(pokemonhabitat.name) : 'Not listed'}}<br>
+      <b>Evolves From: </b>
+      <ng-container *ngIf="pokemonevolvesfrom">
+        <u routerLink="/pokemon/{{pokemonevolvesfrom.name.toLowerCase().split(' ').join('-')}}">{{titleformat(pokemonevolvesfrom.name)}}</u>
+      </ng-container>
+      <ng-container *ngIf="!pokemonevolvesfrom">
+          Base Stage
+      </ng-container><br>
+      <b>Egg Group: </b>
+      <span *ngFor="let egggroup of pokemonegggroups; let isLast=last">
+        {{titleformat(egggroup.name)}} <span *ngIf="!isLast">, </span>
+      </span><br><br>
+  </div>
+  <div class="right-div right-text mat-elevation-z10">
+    <h2>Moveset</h2>
+    <table class="darkTable">
+      <thead>
+        <tr>
+          <th>Move</th>
+          <th>Method of Learning</th> 
+          <th>Level Learned</th>
+          <th>Reference Game</th>
+        </tr>
+      </thead>
+      <ng-container *ngFor="let pokemonmove of pokemonmoves">
+        <tr>
+          <td routerLink="/moves/{{pokemonmove.move.name.toLowerCase().split(' ').join('-')}}"><u>{{ titleformat(pokemonmove.move.name)}}</u></td>
+          <td>{{ titleformat(pokemonmove.version_group_details[0].move_learn_method.name)}}</td>
+          <td>{{pokemonmove.version_group_details[0].move_learn_method.name != 'level-up' ? '' : pokemonmove.version_group_details[0].level_learned_at}}</td>
+          <td>{{ titleformat(pokemonmove.version_group_details[0].version_group.name)}}</td>
+        </tr>
+      </ng-container>
+    </table>
+  </div>
 </div>
 
 <div *ngIf="loading" align=center class=specialboxstyle>
-  <img src="../../assets/loadingbike.gif" height="300" width="300" ><br>
+  <img src="../../assets/loadingbike.gif" height="300vh" width="300vw" ><br>
   Loading...
 </div>
 
 <div *ngIf="!searched" align=center class=specialboxstyle>
-  <img src="../../assets/rotomdex.png"height="300" width="300" ><br>
+  <img src="../../assets/rotomdex.png"height="300vh" width="300vw" ><br>
   Enter a pokémon name or ID to begin
 </div>
 
 <div *ngIf="error" align=center class=specialboxstyle>
-  <img src="../../assets/sad.png"height="300" width="300" ><br>
+  <img src="../../assets/sad.png"height="300vh" width="300vw" ><br>
   No such pokémon found
 </div>
