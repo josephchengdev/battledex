@@ -8,73 +8,65 @@
             </mat-option>
         </mat-autocomplete>
     </mat-form-field>
-    <button style="margin-left: 15px" (click)="enter()" mat-raised-button color="primary" [disabled]="!this.myControl.value">Search</button>
+    <button style="margin-left: 1%" (click)="enter()" mat-raised-button color="primary" [disabled]="!this.myControl.value">Search</button>
     <button *ngIf="show" mat-icon-button color="primary" (click)="right()"><mat-icon>chevron_right</mat-icon></button>
 </div>
 
-<div *ngIf="show" class="infocontainerstyle">
+<div class="container" *ngIf="show">
     <h1>{{movename}}</h1>
-    <mat-drawer-container> 
-        <mat-drawer mode="side" opened>
-            <div class=sidebarstyle>
-                <h2>Base Statistics</h2>
-                <b>ID: </b>#{{moveid}} <br>
-                <b>Power: </b>{{movepower ? movepower : 'NA'}} <br>
-                <b>Accuracy: </b>{{moveaccuracy ? moveaccuracy + '%' : 'NA'}} <br>
-                <b>Type: </b>{{titleformat(movetype)}} <br>
-                <b>Move Class: </b>{{titleformat(moveclass)}} <br>
-                <b>Priority: </b>{{movepriority}} <br>
-                <b>Target: </b>{{titleformat(movetarget)}}<br>
-                <b>Introduction: </b>{{moveintroduction.charAt(0).toUpperCase() + moveintroduction.slice(1).split("-").join(" ")}} <br><br>
-                <mat-divider></mat-divider>
+    <div class="left-div left-text mat-elevation-z10">
+        <h2>Base Statistics</h2>
+        <b>ID: </b>#{{moveid}} <br>
+        <b>Power: </b>{{movepower ? movepower : 'NA'}} <br>
+        <b>Accuracy: </b>{{moveaccuracy ? moveaccuracy + '%' : 'NA'}} <br>
+        <b>Type: </b>{{titleformat(movetype)}} <br>
+        <b>Move Class: </b>{{titleformat(moveclass)}} <br>
+        <b>Priority: </b>{{movepriority}} <br>
+        <b>Target: </b>{{titleformat(movetarget)}}<br>
+        <b>Introduction: </b>{{moveintroduction.charAt(0).toUpperCase() + moveintroduction.slice(1).split("-").join(" ")}} <br><br>
+        <mat-divider></mat-divider>
 
-                <h2>Special Statistics</h2>
-                <b>Ailment: </b>{{titleformat(movemeta.ailment.name)}}<br>
-                <b>Ailment Chance: </b> {{movemeta.ailment_chance == 0 ? 'NA' : (movemeta.ailment_chance + '%')}}<br>
-                <b>Target Flinch Chance: </b>{{movemeta.flinch_chance + '%'}} <br>
-                <b>Stat Change Chance: </b>{{movemeta.stat_chance + '%'}} <br>
-                <b>HP Drain Percentage: </b>{{movemeta.drain + '%'}} <br>
-                <b>HP Healed Percentage: </b>{{movemeta.healing + '%'}} <br>
-                <b>Critical Hit Rate Bonus: </b>{{movemeta.crit_rate}} <br>
-                <b>Min # Of Hits: </b>{{!movemeta.min_hits ? '1' : movemeta.min_hits}} <br>
-                <b>Max # Of Hits: </b>{{!movemeta.max_hits ? '1' : movemeta.max_hits}} <br>
-                <b>Min # Of Turns Lasting: </b>{{!movemeta.min_turns ? '1' : movemeta.min_turns}} <br>
-                <b>Max # Of Turns Lasting: </b>{{!movemeta.max_turns ? '1' : movemeta.max_turns}} <br><br>
-            </div>
-        </mat-drawer>
-        
-        <mat-drawer-content>
-            <div class=mainbarstyle>
-                <h2>Description</h2><br>
-                <ng-container *ngIf="moveflavors[0].language.name == 'en'"><i>{{moveflavors[0].flavor_text}}</i></ng-container>
-                <ng-container *ngIf="moveflavors[1].language.name == 'en'"><i>{{moveflavors[1].flavor_text}}</i></ng-container>
-                <ng-container *ngIf="moveflavors[2].language.name == 'en'"><i>{{moveflavors[2].flavor_text}}</i></ng-container>
-                <ng-container *ngIf="moveflavors[3].language.name == 'en'"><i>{{moveflavors[3].flavor_text}}</i></ng-container>
-                <ng-container *ngIf="moveflavors[4].language.name == 'en'"><i>{{moveflavors[4].flavor_text}}</i></ng-container><br><br>
-                <b>Move Effects: </b>{{moveeffect}} <br><br>
-                <b>Stat Changes: </b> {{movestatchanges.length == 0 ? 'None' : ''}}
-                <ul>
-                    <li *ngFor="let statchange of movestatchanges">
-                        {{ titleformat(statchange.stat.name) }} by {{statchange.change}}
-                    </li>
-                </ul><br>
-            </div>
-        </mat-drawer-content>
-      
-    </mat-drawer-container>
+        <h2>Special Statistics</h2>
+        <b>Ailment: </b>{{titleformat(movemeta.ailment.name)}}<br>
+        <b>Ailment Chance: </b> {{movemeta.ailment_chance == 0 ? 'NA' : (movemeta.ailment_chance + '%')}}<br>
+        <b>Target Flinch Chance: </b>{{movemeta.flinch_chance + '%'}} <br>
+        <b>Stat Change Chance: </b>{{movemeta.stat_chance + '%'}} <br>
+        <b>HP Drain Percentage: </b>{{movemeta.drain + '%'}} <br>
+        <b>HP Healed Percentage: </b>{{movemeta.healing + '%'}} <br>
+        <b>Critical Hit Rate Bonus: </b>{{movemeta.crit_rate}} <br>
+        <b>Min # Of Hits: </b>{{!movemeta.min_hits ? '1' : movemeta.min_hits}} <br>
+        <b>Max # Of Hits: </b>{{!movemeta.max_hits ? '1' : movemeta.max_hits}} <br>
+        <b>Min # Of Turns Lasting: </b>{{!movemeta.min_turns ? '1' : movemeta.min_turns}} <br>
+        <b>Max # Of Turns Lasting: </b>{{!movemeta.max_turns ? '1' : movemeta.max_turns}} <br><br>
+    </div>
+    <div class="right-div right-text mat-elevation-z10">
+        <h2>Description</h2><br>
+            <ng-container *ngIf="moveflavors[0].language.name == 'en'"><i>{{moveflavors[0].flavor_text}}</i></ng-container>
+            <ng-container *ngIf="moveflavors[1].language.name == 'en'"><i>{{moveflavors[1].flavor_text}}</i></ng-container>
+            <ng-container *ngIf="moveflavors[2].language.name == 'en'"><i>{{moveflavors[2].flavor_text}}</i></ng-container>
+            <ng-container *ngIf="moveflavors[3].language.name == 'en'"><i>{{moveflavors[3].flavor_text}}</i></ng-container>
+            <ng-container *ngIf="moveflavors[4].language.name == 'en'"><i>{{moveflavors[4].flavor_text}}</i></ng-container><br><br>
+            <b>Move Effects: </b>{{moveeffect}} <br><br>
+            <b>Stat Changes: </b> {{movestatchanges.length == 0 ? 'None' : ''}}
+            <ul>
+                <li *ngFor="let statchange of movestatchanges">
+                    {{ titleformat(statchange.stat.name) }} by {{statchange.change}}
+                </li>
+            </ul><br>
+    </div>
 </div>
 
 <div *ngIf="loading" align=center class=specialboxstyle>
-    <img src="../../assets/loadingbike.gif" height="300" width="300" ><br>
+    <img src="../../assets/loadingbike.gif" height="300vh" width="300vw" ><br>
     Loading...
 </div>
 
 <div *ngIf="!searched" align=center class=specialboxstyle>
-    <img src="../../assets/bulbasaurattack.png" height="200" width="400" ><br>
+    <img src="../../assets/bulbasaurattack.png" height="250vh" width="350vw" ><br>
     Enter a move name or ID to begin
 </div>
       
 <div *ngIf="error" align=center class=specialboxstyle>
-    <img src="../../assets/sad.png"height="300" width="300" ><br>
+    <img src="../../assets/sad.png"height="300vh" width="300vw" ><br>
     No such move found
 </div>
