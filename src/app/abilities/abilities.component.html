@@ -39,16 +39,16 @@
          <table class="darkTable">
             <thead>
               <tr>
-                <th>Pokemon</th>
+                <th>Pokémon</th>
                 <th>Ability Slot</th> 
                 <th>Hidden Ability</th>
               </tr>
             </thead>
             <ng-container *ngFor="let pokemon of abilitypokemon">
               <tr>
-                <td data-label="Pokemon"><u routerLink="/pokemon/{{pokemon.pokemon.name.toLowerCase().split(' ').join('-')}}">{{titleformat(pokemon.pokemon.name)}}</u></td>
-                <td data-label="Ability Slot">{{ pokemon.slot }}</td>
-                <td data-label="Hidden Ability">{{ (pokemon.is_hidden ? 'Yes' : 'No')}}</td>
+                <td><u routerLink="/pokemon/{{pokemon.pokemon.name.toLowerCase().split(' ').join('-')}}">{{titleformat(pokemon.pokemon.name)}}</u></td>
+                <td>{{ pokemon.slot }}</td>
+                <td>{{ (pokemon.is_hidden ? 'Yes' : 'No')}}</td>
               </tr>
           </ng-container>
           </table>
