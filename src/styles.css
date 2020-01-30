@@ -31,8 +31,10 @@ body {
 }
 
 .specialboxstyle {
-  font-size: 200%;
-  padding-top: 100px;
+  font-size: 160%;
+  margin-top: 5%;
+  margin-left: 2%;
+  margin-right: 2%;
 }
 
 table.darkTable {
