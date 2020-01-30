@@ -16,6 +16,7 @@
     "@angular/common": "^8.2.14",
     "@angular/compiler": "^8.2.14",
     "@angular/core": "^8.2.14",
+    "@angular/flex-layout": "^8.0.0-beta.27",
     "@angular/forms": "^8.2.14",
     "@angular/http": "^7.2.16",
     "@angular/material": "^8.2.3",
@@ -50,7 +51,7 @@
     "rxjs-tslint": "^0.1.7",
     "ts-node": "~5.0.1",
     "tslint": "^5.20.1",
-    "typescript": "3.4.5",
+    "typescript": "^3.5.3",
     "webpack": "^4.41.5"
   }
 }

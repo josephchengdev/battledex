@@ -23,6 +23,7 @@ import { ItemsComponent } from './items/items.component';
 import { AbilitiesComponent } from './abilities/abilities.component';
 import { NotfoundComponent } from './notfound/notfound.component';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FlexLayoutModule } from "@angular/flex-layout";
 
 
 
@@ -53,7 +54,8 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
     MatIconModule,
     AppRoutingModule,
     ReactiveFormsModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    FlexLayoutModule
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,24 +1,33 @@
-.cardstyles{
-    width:200px;
-    height:60px;
-    float: left;
-    margin-left: 10px;
-    margin-right: 10px;
+.landingtextstyle{
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+    font-size: 160%;
 }
 
-.boxstyles{
-    position: absolute;
-    left:50%;
-    top:50%;
-    margin-left: -505px;
-    margin-top: -30px;
-
+.cardcontainerstyle, .cardstyle {
+    margin: 0
 }
 
-.battlegroundstyle{
-    position: absolute;
-    left:50%;
-    top:70%;
-    margin-left: -128px;
-    margin-top: -25px;
+.cardcontainerstyle {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 auto;
+    width: 80%;
 }
+
+.cardstyle {
+  flex: 1;
+  height: 10vh;
+  margin: 1%;
+  text-align: left;
+}
+
+.battlegroundstyle {
+    margin-top: 5%;
+    margin-bottom: 5%;
+    margin-left: 2%;
+    margin-right: 2%;
+}
+

@@ -6,3 +6,31 @@
   font-weight: bold;
   font-size: medium;
 }
+
+.mat-toolbar{
+height: 7vh;
+}
+
+div {
+  overflow: inherit;
+}
+
+.mat-sidenav-container{
+  background-color: #333333;
+  min-height: 93vh !important;
+  
+}
+
+a{
+  text-decoration: none;
+  white-space: normal;
+}
+
+button{
+  min-width: min-content;
+  text-align:left;
+}
+
+/* .mat-sidenav-content{
+    text-align: center;
+} */
