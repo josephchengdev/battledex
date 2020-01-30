@@ -92,16 +92,14 @@
       <thead>
         <tr>
           <th>Move</th>
-          <th>Method of Learning</th> 
-          <th>Level Learned</th>
-          <th>Reference Game</th>
+          <th>Method</th> 
+          <th>Source</th>
         </tr>
       </thead>
       <ng-container *ngFor="let pokemonmove of pokemonmoves">
         <tr>
-          <td routerLink="/moves/{{pokemonmove.move.name.toLowerCase().split(' ').join('-')}}"><u>{{ titleformat(pokemonmove.move.name)}}</u></td>
-          <td>{{ titleformat(pokemonmove.version_group_details[0].move_learn_method.name)}}</td>
-          <td>{{pokemonmove.version_group_details[0].move_learn_method.name != 'level-up' ? '' : pokemonmove.version_group_details[0].level_learned_at}}</td>
+          <td><u routerLink="/moves/{{pokemonmove.move.name.toLowerCase().split(' ').join('-')}}">{{ titleformat(pokemonmove.move.name)}}</u></td>
+          <td>{{ titleformat(pokemonmove.version_group_details[0].move_learn_method.name)}} {{pokemonmove.version_group_details[0].move_learn_method.name != 'level-up' ? '' : 'To   Level ' + pokemonmove.version_group_details[0].level_learned_at}}</td>
           <td>{{ titleformat(pokemonmove.version_group_details[0].version_group.name)}}</td>
         </tr>
       </ng-container>

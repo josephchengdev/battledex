@@ -1,42 +1,39 @@
-<div> 
-    <mat-toolbar color="primary" class="mat-elevation-z10" style="position: sticky; position: -webkit-sticky; top: 0; z-index: 1000;">
-        
+<div class="containerstyle">
+    <mat-toolbar color="primary" class="toolbarstyle mat-elevation-z10">
         <div fxShow="true" fxHide.gt-sm="true">
-        <button mat-icon-button (click)="sidenav.toggle()">
-            <mat-icon>menu</mat-icon>
-        </button>
-        </div>
-
-        <button mat-button routerLink="/home"><img src="../favicon.ico"><h1 style="display: inline; font-weight: bold"> Battledex </h1><img src="../favicon.ico"></button>
-        <div fxShow="true" fxHide.lt-md="true">
-        <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
-        <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
-        <button mat-button routerLink="/abilities" routerLinkActive="linkactive">Abilities</button>
-        <button mat-button routerLink="/items" routerLinkActive="linkactive">Items</button>
-        </div>
-        <span class="space"></span>
-        <div fxShow="true" fxHide.lt-md="true">
-        <button mat-icon-button (click)="clickgithub()"><mat-icon svgIcon='github'></mat-icon></button>
-        </div>
-
-    </mat-toolbar>
-
-    <mat-sidenav-container fxFlexFill>
-        
-        <mat-sidenav color="primary" #sidenav fxLayout="column" mode="over"  fixedInViewport="true" [style.marginTop.px]="56" opened="false" fxHide.gt-sm="true">
-            <div fxLayout="column" align=left>
-                <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
-                <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
-                <button mat-button routerLink="/abilities" routerLinkActive="linkactive">Abilities</button>
-                <button mat-button routerLink="/items" routerLinkActive="linkactive">Items</button>
-                <button mat-icon-button (click)="clickgithub()" style="padding-left:20%"><mat-icon svgIcon='github'></mat-icon></button>
+            <button mat-icon-button (click)="sidenav.toggle()">
+                <mat-icon>menu</mat-icon>
+            </button>
             </div>
-        </mat-sidenav>
-
-        <mat-sidenav-content fxFlexFill>
-            <router-outlet></router-outlet>
-        </mat-sidenav-content>
-
+            <button mat-button routerLink="/home"><img src="../favicon.ico"><h1 style="display: inline; font-weight: bold"> Battledex </h1><img src="../favicon.ico"></button>
+            <div fxShow="true" fxHide.lt-md="true">
+            <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
+            <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
+            <button mat-button routerLink="/abilities" routerLinkActive="linkactive">Abilities</button>
+            <button mat-button routerLink="/items" routerLinkActive="linkactive">Items</button>
+            </div>
+            <span class="space"></span>
+            <div fxShow="true" fxHide.lt-md="true">
+            <button mat-icon-button (click)="clickgithub()"><mat-icon svgIcon='github'></mat-icon></button>
+            </div>
+    </mat-toolbar>
+  
+    <mat-sidenav-container class="sidenavstyle" [style.marginTop.px]="56">
+      <mat-sidenav color="primary" #sidenav fxLayout="column" opened="false" fxHide.gt-sm="true" [mode]=over [fixedInViewport]=true fixedTopGap="56" align=left>
+        <div fxLayout="column" align=left>
+            <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
+            <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
+            <button mat-button routerLink="/abilities" routerLinkActive="linkactive">Abilities</button>
+            <button mat-button routerLink="/items" routerLinkActive="linkactive">Items</button>
+            <button mat-icon-button (click)="clickgithub()" style="padding-left:20%"><mat-icon svgIcon='github'></mat-icon></button>
+        </div>
+      </mat-sidenav>
+  
+      <mat-sidenav-content>
+        <router-outlet></router-outlet>
+      </mat-sidenav-content>
     </mat-sidenav-container>
-</div>
+  </div>
+
+
 

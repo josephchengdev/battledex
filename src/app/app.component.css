@@ -7,30 +7,21 @@
   font-size: medium;
 }
 
-.mat-toolbar{
-height: 7vh;
+.containerstyle {
+  display: flex;
+  flex-direction: column;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
 }
 
-div {
-  overflow: inherit;
+.toolbarstyle {
+  position: fixed;
+  z-index: 2;
 }
 
-.mat-sidenav-container{
-  background-color: #333333;
-  min-height: 93vh !important;
-  
+.sidenavstyle {
+  flex: 1 0 auto;
 }
-
-a{
-  text-decoration: none;
-  white-space: normal;
-}
-
-button{
-  min-width: min-content;
-  text-align:left;
-}
-
-/* .mat-sidenav-content{
-    text-align: center;
-} */
