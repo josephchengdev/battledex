@@ -7,10 +7,10 @@
             </div>
             <button mat-button routerLink="/home"><img src="../favicon.ico"><h1 style="display: inline; font-weight: bold"> Battledex </h1><img src="../favicon.ico"></button>
             <div fxShow="true" fxHide.lt-md="true">
-            <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
-            <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
-            <button mat-button routerLink="/abilities" routerLinkActive="linkactive">Abilities</button>
-            <button mat-button routerLink="/items" routerLinkActive="linkactive">Items</button>
+              <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
+              <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
+              <button mat-button routerLink="/abilities" routerLinkActive="linkactive">Abilities</button>
+              <button mat-button routerLink="/items" routerLinkActive="linkactive">Items</button>
             </div>
             <span class="space"></span>
             <div fxShow="true" fxHide.lt-md="true">
@@ -20,7 +20,7 @@
   
     <mat-sidenav-container class="sidenavstyle" [style.marginTop.px]="56">
       <mat-sidenav color="primary" #sidenav fxLayout="column" opened="false" fxHide.gt-sm="true" mode="over" fixedInViewport="true" fixedTopGap="56">
-        <div fxLayout="column">
+        <div fxLayout="column" style="padding-top: 10px;">
             <button mat-button routerLink="/pokemon" routerLinkActive="linkactive">Pokémon</button>
             <button mat-button routerLink="/moves" routerLinkActive="linkactive">Moves</button>
             <button mat-button routerLink="/abilities" routerLinkActive="linkactive">Abilities</button>
