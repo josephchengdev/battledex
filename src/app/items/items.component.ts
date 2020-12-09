@@ -117,7 +117,13 @@ export class ItemsComponent implements OnInit {
             this.itemflavor = data['flavor_text_entries'][i]['text'];
           }
         }
-        this.itemeffect = data['effect_entries'][0]['effect']
+        if(data['effect_entries'].length > 0){
+          for (var i = 0, x = data['effect_entries'].length; i < x; i++) {
+            if (data['effect_entries'][i]['language']['name'] == 'en') {
+              this.itemeffect = data['effect_entries'][i]['effect'];
+            }
+          }
+        }
         this.itemcategory = data['category']['name']
         this.itemflingeffect = (data['fling_effect'] ? this.titleformat(data['fling_effect']['name']) : "None");
         this.itemflingpower = (data['fling_power'] ? data['fling_power'] : "NA");

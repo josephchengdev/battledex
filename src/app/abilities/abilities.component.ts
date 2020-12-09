@@ -111,7 +111,11 @@ export class AbilitiesComponent implements OnInit {
           }
         }
         if(data['effect_entries'].length > 0){
-          this.abilityeffect = data['effect_entries'][0]['effect']
+          for (var i = 0, x = data['effect_entries'].length; i < x; i++) {
+            if (data['effect_entries'][i]['language']['name'] == 'en') {
+              this.abilityeffect = data['effect_entries'][i]['effect'];
+            }
+          }
         }
         else {
           this.abilityeffect = 'None'

@@ -121,7 +121,13 @@ export class MovesComponent implements OnInit {
         this.moveclass = data['damage_class']['name'];
         this.moveintroduction = data['generation']['name'];
         this.moveeffectchance = data['effect_chance'];
-        this.moveeffect = data['effect_entries'][0]['effect'].split("$effect_chance").join(this.moveeffectchance);
+        if(data['effect_entries'].length > 0){
+          for (var i = 0, x = data['effect_entries'].length; i < x; i++) {
+            if (data['effect_entries'][i]['language']['name'] == 'en') {
+              this.moveeffect = data['effect_entries'][i]['effect'].split("$effect_chance").join(this.moveeffectchance);
+            }
+          }
+        }
         this.movetarget = data['target']['name'];
         for (var i = 0, x = data['flavor_text_entries'].length; i < x; i++) {
           if (data['flavor_text_entries'][i]['language']['name'] == 'en') {
