@@ -29,7 +29,7 @@ export class MovesComponent implements OnInit {
   moveeffectchance;
   moveeffect;
   movetarget;
-  moveflavors;
+  moveflavor;
   movestatchanges;
   movemeta;
   focus = false;
@@ -123,7 +123,11 @@ export class MovesComponent implements OnInit {
         this.moveeffectchance = data['effect_chance'];
         this.moveeffect = data['effect_entries'][0]['effect'].split("$effect_chance").join(this.moveeffectchance);
         this.movetarget = data['target']['name'];
-        this.moveflavors = data['flavor_text_entries'];
+        for (var i = 0, x = data['flavor_text_entries'].length; i < x; i++) {
+          if (data['flavor_text_entries'][i]['language']['name'] == 'en') {
+            this.moveflavor = data['flavor_text_entries'][i]['flavor_text'];
+          }
+        }
         this.movestatchanges = data['stat_changes'];
         this.movemeta = data['meta'];
         this.loading = false;

@@ -22,7 +22,7 @@ export class AbilitiesComponent implements OnInit {
   abilitymainseries;
   abilitygeneration;
   abilityeffect;
-  abilityflavors;
+  abilityflavor;
   abilitypokemon;
   focus = false;
 
@@ -105,7 +105,11 @@ export class AbilitiesComponent implements OnInit {
         this.abilityname = this.titleformat(data['name']);
         this.myControl.setValue(this.titleformat(this.abilityname))
         this.abilityid = data['id'];
-        this.abilityflavors = data['flavor_text_entries'];
+        for (var i = 0, x = data['flavor_text_entries'].length; i < x; i++) {
+          if (data['flavor_text_entries'][i]['language']['name'] == 'en') {
+            this.abilityflavor = data['flavor_text_entries'][i]['flavor_text'];
+          }
+        }
         if(data['effect_entries'].length > 0){
           this.abilityeffect = data['effect_entries'][0]['effect']
         }

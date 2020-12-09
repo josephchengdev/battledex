@@ -23,7 +23,7 @@ export class ItemsComponent implements OnInit {
   itemcost;
   itemcategory;
   itemattributes;
-  itemflavors;
+  itemflavor;
   itemeffect;
   itemflingpower;
   itemflingeffect;
@@ -112,7 +112,11 @@ export class ItemsComponent implements OnInit {
         this.itemid = data['id'];
         this.itemcost = (data['cost'] == 0 ? "Not Sold" : ("$" + (data['cost'])));
         this.itemattributes = data['attributes'];
-        this.itemflavors = data['flavor_text_entries']
+        for (var i = 0, x = data['flavor_text_entries'].length; i < x; i++) {
+          if (data['flavor_text_entries'][i]['language']['name'] == 'en') {
+            this.itemflavor = data['flavor_text_entries'][i]['text'];
+          }
+        }
         this.itemeffect = data['effect_entries'][0]['effect']
         this.itemcategory = data['category']['name']
         this.itemflingeffect = (data['fling_effect'] ? this.titleformat(data['fling_effect']['name']) : "None");

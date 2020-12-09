@@ -41,14 +41,10 @@
     </div>
     <div class="right-div right-text mat-elevation-z10">
         <h2>Description</h2><br>
-        <ng-container *ngIf="moveflavors.length != 0">
-            <ng-container *ngIf="moveflavors[0] && moveflavors[0].language.name == 'en'"><i>{{moveflavors[0].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="moveflavors[1] && moveflavors[1].language.name == 'en'"><i>{{moveflavors[1].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="moveflavors[2] && moveflavors[2].language.name == 'en'"><i>{{moveflavors[2].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="moveflavors[3] && moveflavors[3].language.name == 'en'"><i>{{moveflavors[3].flavor_text}}</i></ng-container>
-            <ng-container *ngIf="moveflavors[4] && moveflavors[4].language.name == 'en'"><i>{{moveflavors[4].flavor_text}}</i></ng-container><br><br>
+        <ng-container *ngIf="moveflavor.length != 0">
+            <i>{{moveflavor}}</i><br><br>
         </ng-container>
-        <ng-container *ngIf="moveflavors.length == 0">
+        <ng-container *ngIf="moveflavor.length == 0">
             No flavor text exists for this move<br><br>
         </ng-container>
             <b>Move Effects: </b>{{moveeffect}} <br><br>

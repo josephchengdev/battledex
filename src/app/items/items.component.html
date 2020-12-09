@@ -41,14 +41,10 @@
         </div>
         <div class="right-div right-text mat-elevation-z10">
             <h2>Description</h2><br>
-                <ng-container *ngIf="itemflavors.length != 0">
-                    <ng-container *ngIf="itemflavors[0] && itemflavors[0].language.name == 'en'"><i>{{itemflavors[0].text}}</i></ng-container>
-                    <ng-container *ngIf="itemflavors[1] && itemflavors[1].language.name == 'en'"><i>{{itemflavors[1].text}}</i></ng-container>
-                    <ng-container *ngIf="itemflavors[2] && itemflavors[2].language.name == 'en'"><i>{{itemflavors[2].text}}</i></ng-container>
-                    <ng-container *ngIf="itemflavors[3] && itemflavors[3].language.name == 'en'"><i>{{itemflavors[3].text}}</i></ng-container>
-                    <ng-container *ngIf="itemflavors[4] && itemflavors[4].language.name == 'en'"><i>{{itemflavors[4].text}}</i></ng-container><br><br>
+                <ng-container *ngIf="itemflavor.length != 0">
+                    <i>{{itemflavor}}</i><br><br>
                 </ng-container>
-                <ng-container *ngIf="itemflavors.length == 0">
+                <ng-container *ngIf="itemflavor.length == 0">
                     No flavor text exists for this item<br><br>
                 </ng-container>
                 <b>Item Effects: </b>{{itemeffect}} <br><br>

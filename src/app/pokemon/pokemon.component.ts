@@ -145,7 +145,11 @@ export class PokemonComponent implements OnInit {
     this.pokemonevolvesfrom = moredata['evolves_from_species']
     this.pokemoncolor = moredata['color']
     this.pokemonshape = moredata['shape']
-    this.pokemondescriptions = moredata['flavor_text_entries']
+    for (var i = 0, x = moredata['flavor_text_entries'].length; i < x; i++) {
+      if (moredata['flavor_text_entries'][i]['language']['name'] == 'en') {
+        this.pokemondescriptions = moredata['flavor_text_entries'][i]['flavor_text']
+      }
+    }
     this.pokemonevolutionchain = moredata['evolution_chain']
     this.loading = false;
     this.show = true;

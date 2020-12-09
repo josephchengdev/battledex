@@ -44,11 +44,7 @@
       <h2>Description</h2>
       <div class=descboxstyle>
         <ng-container *ngIf="pokemondescriptions.length != 0">
-          <ng-container *ngIf="pokemondescriptions[0] && pokemondescriptions[0].language.name == 'en'"><i>{{pokemondescriptions[0].flavor_text}}</i></ng-container>
-          <ng-container *ngIf="pokemondescriptions[1] && pokemondescriptions[1].language.name == 'en'"><i>{{pokemondescriptions[1].flavor_text}}</i></ng-container>
-          <ng-container *ngIf="pokemondescriptions[2] && pokemondescriptions[2].language.name == 'en'"><i>{{pokemondescriptions[2].flavor_text}}</i></ng-container>
-          <ng-container *ngIf="pokemondescriptions[3] && pokemondescriptions[3].language.name == 'en'"><i>{{pokemondescriptions[3].flavor_text}}</i></ng-container>
-          <ng-container *ngIf="pokemondescriptions[4] && pokemondescriptions[4].language.name == 'en'"><i>{{pokemondescriptions[4].flavor_text}}</i></ng-container>
+          <i>{{pokemondescriptions}}</i>
         </ng-container>
         <ng-container *ngIf="pokemondescriptions.length == 0">
             No flavor text exists for this item
